@@ -1,6 +1,3 @@
-
-
-
 #ifndef IRLibTimer_h
 #define IRLibTimer_h
 
@@ -10,29 +7,20 @@
 #include "WProgram.h"
 #endif
 
-/* We are going to presume that you want to use the same hardware timer to control
- * the 50 microsecond interrupt used by the IRrecv receiver class as was specified
- * above in the hardware detection section for sending. Even if you specified bit-bang 
- * for sending, the definitions above have selected a default sending timer for you based 
- * on hardware detection. if that is correct, then do nothing below.  However if you do
- * wish to specify an IR_RECV_TIMER different than the IR_SEND_TIMER selected by the code 
- * above, then you should un-comment the IR_RECV_TIMER_OVERRIDE and also un-comment one 
- * and only one of the following IR_RECV_TIMERx lines below that.
- * NOTE: You are responsible for ensuring that the timer you are specifying is 
- * available on your hardware. You should only choose timers which are shown as available 
- * for your hardware platform as shown in the defines in the IR_SEND_TIMER section above.
- */
 #define IR_RECV_TIMER_OVERRIDE
 //#define IR_RECV_TIMER1
 #define IR_RECV_TIMER2
-//#define IR_RECV_TIMER3
-//#define IR_RECV_TIMER4
-//#define IR_RECV_TIMER4_HS
-//#define IR_RECV_TIMER5
+
+
+
+
+
+
+
 
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-	#define IR_SEND_TIMER1	11
+	//#define IR_SEND_TIMER1	11
 	//#define IR_SEND_TIMER2		9
 	//#define IR_SEND_TIMER3	5
 	//#define IR_SEND_TIMER4	6

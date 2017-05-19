@@ -1,3 +1,7 @@
+// ArduCAM Smart_Robot_Car demo (C)2017 Lee
+// This demo support smart mode .
+
+
 #include <AFMotor.h> 
 #include <Servo.h>    
 #include <NewPing.h>
