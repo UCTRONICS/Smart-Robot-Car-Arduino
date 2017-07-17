@@ -90,7 +90,7 @@ void setCourse() {
 
 void checkCourse() {
   moveBackward();
-  delay(1000);
+  delay(400);
   moveStop();
   setCourse();
 }

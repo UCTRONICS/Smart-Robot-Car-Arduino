@@ -1,14 +1,14 @@
 // ArduCAM Smart_Robot_Car demo (C)2017 Lee
-// This demo support bluetooth control、IR control and default is  bluetooth control mode
-// It needs to be used in combination with bluetooth software.
-// Before running this demo, you should enable the IR_RECV_TIMER2 
-// in the ../../libraries/ArducamIR/IRLibTimer.h !!
+// This demo support smart mode .
+// This demo support bluetooth control and IR remote control.
+// The default mode is bluetooth control you can change it to 
+// the IR control mode by touching the IRENABLE key.
+// We optimize the IR control code for more sensitive control.
 
 #include <AFMotor.h> 
 #include <Servo.h>    
 #include <NewPing.h>
-#include <IRLib.h>
-#include <IRLibTimer.h>
+#include "ArducamNEC.h"
 #define TRIG_PIN A2 
 #define ECHO_PIN A3
 #define MAX_DISTANCE_POSSIBLE 1000 
@@ -19,11 +19,7 @@
 #define TURN_DIST COLL_DIST+10 
 
 int RECV_PIN = 2;
-
-#if !(defined IR_RECV_TIMER2)
-  #error Please enable the IR_RECV_TIMER2 ans disable the IR_RECV_TIMER1 in the ../../libraries/ArducamIR/IRLibTimer.h
-#endif
-
+ArducamNEC myIR(2);
 NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE_POSSIBLE);
 
 AF_DCMotor leftMotor(3, MOTOR34_64KHZ); 
@@ -43,62 +39,22 @@ int speedSet = 0;
 bool smartEnable=false;
 bool checkPathEenable= false;
 bool IR_Enable = false;
-IRrecvLoop My_Receiver(RECV_PIN); 
-IRdecode My_Decoder;
-
 void setup() {
 // put your setup code here, to run once:
 uint8_t temp;
  Serial.begin(9600);
 neckControllerServoMotor.attach(10);  
 neckControllerServoMotor.write(90); 
-delay(1000);
-checkPath(); 
+//checkPath(); 
 motorSet = "FORWARD"; 
 neckControllerServoMotor.write(90);
 moveStop();
-My_Receiver.enableIRIn(); // Start the receiver
 }
 void loop() {
 // put your main code here, to run repeatedly:
-uint8_t temp = 0xff, temp_last = 0;
-bool is_header = false;
-if(IR_Enable){
-if (My_Receiver.GetResults(&My_Decoder)) {
-    My_Decoder.decode();
-   My_Decoder.DumpResults();
-    My_Receiver.resume(); 
-    delay(500);
-  if (My_Decoder.value == 0xFF629D)  //up
-  { 
-   My_Decoder.value = 0;
-   moveForward();
- }else if(My_Decoder.value == 0xFFA857){  //down
-   Serial.println(F(" Move backward"));
-  My_Decoder.value = 0;
-   moveBackward();
-  }else if (My_Decoder.value == 0xFF22DD){ // left
-   Serial.println(F(" Turn left"));
-   My_Decoder.value = 0;
-    turnLeft();  
-    }else if (My_Decoder.value == 0xFFC23D){  //right
-    My_Decoder.value = 0;
-    turnRight();
-    }else if (My_Decoder.value == 0xFF02FD){  
-     Serial.println(F(" Stop"));
-     My_Decoder.value = 0;
-    smartEnable = false;
-     neckControllerServoMotor.write(90);
-     moveStop();
-   }else if (My_Decoder.value == 0xFF42BD){  //change to bluetooth mode
-            IR_Enable = false;
-            smartEnable = false;
-            neckControllerServoMotor.write(90);
-            Serial.println(F(" This is bluetooth control mode, Please use your bluetooth controller"));
-            moveStop();
-         }  
-  }
-}else{
+uint32_t temp = 0xff;
+if(!IR_Enable)
+{
 if (Serial.available())
 {
   temp = Serial.read();
@@ -127,17 +83,26 @@ if (Serial.available())
   case 0x05:
    Serial.println(F(" Stop"));
    smartEnable = false;
-     neckControllerServoMotor.write(90);
+   neckControllerServoMotor.write(90);
+   delay(100);
+   neckControllerServoMotor.detach();
    moveStop();
     break;
   case 0x06:
+       neckControllerServoMotor.attach(10);  
+       neckControllerServoMotor.write(90); 
        smartEnable = true;
+       IR_Enable = false;
        Serial.println(F("this is smart mode and you don't do anything"));
        moveStop();
        delay(1000);
        moveForward();
       break;
   case 0x07:
+       delay(100);
+       neckControllerServoMotor.detach();
+       delay(100);
+       myIR.begin(); 
        IR_Enable = true;
        smartEnable = false;
        Serial.println(F("this is IR control mode, Please use your IR controller"));
@@ -152,6 +117,43 @@ if (Serial.available())
      checkForward();  
      checkPath();
     }
+    
+  if(IR_Enable){
+  while(myIR.available())
+  {
+    temp =  myIR.read();
+  }
+  if (temp == 0xFF46B9)  //up
+  { 
+   temp = 0;
+   Serial.println(F(" Move forward"));
+   moveForward();
+ }else if(temp == 0xFF15EA){  //down
+   Serial.println(F(" Move backward"));
+  temp = 0;
+   moveBackward();
+  }else if (temp == 0xFF44BB){ // left
+   Serial.println(F(" Turn left"));
+   temp = 0;
+    turnLeft();  
+    }else if (temp == 0xFF43BC){  //right
+    temp = 0;
+      Serial.println(F(" Turn right"));
+    turnRight();
+    }else if (temp == 0xFF40BF){  
+     Serial.println(F(" Stop"));
+     temp = 0;
+    smartEnable = false;
+     neckControllerServoMotor.write(90);
+     moveStop();
+   }else if (temp == 0xFF42BD){  //change to bluetooth mode
+            IR_Enable = false;
+            smartEnable = false;
+            neckControllerServoMotor.write(90);
+            Serial.println(F(" This is bluetooth control mode, Please use your bluetooth controller"));
+            moveStop();
+         }  
+}
 }
 
 
@@ -162,12 +164,21 @@ int readPing() {
   return cm;
 }
 void checkPath() {
+  int i=0;
   int curLeft = 0;
   int curFront = 0;
   int curRight = 0;
   int curDist = 0;
   uint16_t temp = 0;
-  neckControllerServoMotor.write(150);
+  if (Serial.available())
+  i=Serial.read();
+  if(i==0x05){
+    neckControllerServoMotor.write(90); 
+   moveStop();
+   delay(100);
+   neckControllerServoMotor.detach();
+   }else
+  {neckControllerServoMotor.write(150);
   delay(90); 
   for(pos = 160; pos >= 30; pos-=20)
   {
@@ -193,6 +204,7 @@ void checkPath() {
   maxRight = curRight;
   maxFront = curFront;
 }
+}
 void setCourse() {
     if (maxAngle < 90) {turnRight();}
     if (maxAngle > 90) {turnLeft();}
@@ -201,16 +213,16 @@ void setCourse() {
     maxFront = 0;
 }
 void checkCourse() {
-  moveBackward();
-  delay(1000);
+ moveBackward();
+  delay(200);
   moveStop();
   setCourse();
 }
 void changePath() {
+  checkCourse();
   if (pos < 90) {lookLeft();} 
   if (pos > 90) {lookRight();}
 }
-
 void checkForward() 
 { 
   if (motorSet=="FORWARD") 
@@ -219,7 +231,6 @@ void checkForward()
     rightMotor.run(FORWARD); 
    }
  }
-
 void checkBackward() { if (motorSet=="BACKWARD") {leftMotor.run(BACKWARD); rightMotor.run(BACKWARD); } }
 
 void moveStop() {leftMotor.run(RELEASE); rightMotor.run(RELEASE);}
@@ -252,7 +263,7 @@ void turnRight() {
  leftMotor.run(FORWARD);
   rightMotor.run(BACKWARD);
   if (smartEnable){
-    delay(400);
+    delay(80);
     motorSet = "FORWARD";
    leftMotor.run(FORWARD);
    rightMotor.run(FORWARD); 
@@ -271,7 +282,7 @@ void turnLeft() {
    leftMotor.run(BACKWARD);
    rightMotor.run(FORWARD);
    if(smartEnable){
-    delay(400);
+    delay(80);
     motorSet = "FORWARD";
    leftMotor.run(FORWARD);
    rightMotor.run(FORWARD);   
@@ -288,4 +299,3 @@ void turnLeft() {
 
 void lookRight() {rightMotor.run(BACKWARD); delay(400); rightMotor.run(FORWARD);}
 void lookLeft() {leftMotor.run(BACKWARD); delay(400); leftMotor.run(FORWARD);}
-
