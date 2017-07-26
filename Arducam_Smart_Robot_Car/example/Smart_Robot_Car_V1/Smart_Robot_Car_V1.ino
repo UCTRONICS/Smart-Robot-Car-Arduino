@@ -5,8 +5,8 @@
 #include <AFMotor.h> 
 #include <Servo.h>    
 #include <NewPing.h>
-#define TRIG_PIN A4 
-#define ECHO_PIN A5
+#define TRIG_PIN A2 
+#define ECHO_PIN A3
 #define MAX_DISTANCE_POSSIBLE 1000 
 #define MAX_SPEED 150 // 
 #define MOTORS_CALIBRATION_OFFSET 5
@@ -14,8 +14,8 @@
 #define TURN_DIST COLL_DIST+10 
 NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE_POSSIBLE);
 
-AF_DCMotor leftMotor(1, MOTOR12_64KHZ); 
-AF_DCMotor rightMotor(2, MOTOR12_64KHZ); 
+AF_DCMotor leftMotor(3, MOTOR34_64KHZ); 
+AF_DCMotor rightMotor(4, MOTOR34_64KHZ); 
 Servo neckControllerServoMotor;
 
 int pos = 0; 
@@ -90,7 +90,7 @@ void setCourse() {
 
 void checkCourse() {
   moveBackward();
-  delay(400);
+  delay(300);
   moveStop();
   setCourse();
 }
@@ -167,4 +167,3 @@ void turnLeft() {
 
 void lookRight() {rightMotor.run(BACKWARD); delay(400); rightMotor.run(FORWARD);}
 void lookLeft() {leftMotor.run(BACKWARD); delay(400); leftMotor.run(FORWARD);}
-
