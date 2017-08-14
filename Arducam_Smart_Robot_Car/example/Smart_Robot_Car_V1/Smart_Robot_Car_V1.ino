@@ -1,4 +1,6 @@
-// ArduCAM Smart_Robot_Car demo (C)2017 Lee
+// ArduCAM Smart_Robot_Car demo (C)2017
+//Before using this demo, you shold install AFMotor and NewPing library
+//which are in the InstallLibrary folder.
 // This demo support smart mode .
 
 
