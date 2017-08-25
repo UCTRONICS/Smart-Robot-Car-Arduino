@@ -1,5 +1,9 @@
 # Smart-Robot-Car-Arduino
 
+The video demo link:
+
+https://youtu.be/0FB7J-Qzcag
+
 Ardcam smart robot car V1 : support smart mode
 
 Ardcam smart robot car V2 : add support bluetooth control and IR control
