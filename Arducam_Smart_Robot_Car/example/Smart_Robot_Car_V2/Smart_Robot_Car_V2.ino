@@ -1,3 +1,4 @@
+
 // ArduCAM Smart_Robot_Car demo (C)2017 Lee
 // This demo support smart mode .
 // This demo support bluetooth control and IR remote control.
@@ -5,6 +6,7 @@
 // the IR control mode by touching the IRENABLE key.
 // We optimize the IR control code for more sensitive control.
 // When there are some obstacles ahead, the car will stop.
+//video link: https://youtu.be/0FB7J-Qzcag
 
 
 #include <AFMotor.h>
