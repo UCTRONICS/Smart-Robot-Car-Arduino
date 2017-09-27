@@ -188,7 +188,8 @@ void loop() {
   }
   if (detected_flag) {
     for (uint8_t i = 0; i < 3; i++)
-      detecteVal =  readPing();
+     detecteVal = detecteVal + readPing();
+     detecteVal = detecteVal / 3;
     if ((detecteVal > 0) && (detecteVal < 30) )
       moveStop();
   }
