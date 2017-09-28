@@ -84,8 +84,8 @@ void checkPath() {
 }
 
 void setCourse() {
-    if (maxAngle < 90) {turnRight();}
-    if (maxAngle > 90) {turnLeft();}
+    if (maxAngle > 90) {turnRight();}
+    if (maxAngle < 90) {turnLeft();}
     maxLeft = 0;
     maxRight = 0;
     maxFront = 0;
@@ -99,6 +99,7 @@ void checkCourse() {
 }
 
 void changePath() {
+  checkCourse();
   if (pos < 90) {lookLeft();} 
   if (pos > 90) {lookRight();}
 }
