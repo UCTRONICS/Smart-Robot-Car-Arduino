@@ -259,10 +259,10 @@ void checkPath() {
   }
 }
 void setCourse() {
-  if (maxAngle < 90) {
+  if (maxAngle > 90) {
     turnRight();
   }
-  if (maxAngle > 90) {
+  if (maxAngle < 90) {
     turnLeft();
   }
   maxLeft = 0;
