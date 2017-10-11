@@ -171,4 +171,3 @@ void turnLeft() {
 
 void lookRight() {rightMotor.run(BACKWARD); delay(400); rightMotor.run(FORWARD);}
 void lookLeft() {leftMotor.run(BACKWARD); delay(400); leftMotor.run(FORWARD);}
-
