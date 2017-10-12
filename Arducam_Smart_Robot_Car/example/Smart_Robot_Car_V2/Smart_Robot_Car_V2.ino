@@ -11,34 +11,22 @@
 
 #include <AFMotor.h>
 #include <Servo.h>
-#include <NewPing.h>
 #include "ArducamNEC.h"
-#define TRIG_PIN A2
-#define ECHO_PIN A3
-#define MAX_DISTANCE_POSSIBLE 1000
-#define MAX_SPEED 150
-#define TURN_MAX_SPEED 150
-#define MOTORS_CALIBRATION_OFFSET 0
-#define COLL_DIST 30
-#define TURN_DIST COLL_DIST+10
 
-int RECV_PIN = 2;
+#define TURN_DIST 40
+#define speedSet  150
+
 ArducamNEC myIR(2);
-NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE_POSSIBLE);
-
 AF_DCMotor leftMotor(3, MOTOR34_64KHZ);
 AF_DCMotor rightMotor(4, MOTOR34_64KHZ);
 Servo neckControllerServoMotor;
-int pos = 0;
-int maxDist = 0;
-int maxAngle = 0;
-int maxRight = 0;
-int maxLeft = 0;
-int maxFront = 0;
-int course = 0;
-int curDist = 0;
-String motorSet = "";
-int speedSet = 0;
+
+int trig = A2;
+int echo = A3;
+unsigned int S;
+unsigned int Sleft;
+unsigned int Sright;
+int RECV_PIN = 2;
 bool smartEnable = false;  //This flag is used for enable smart mode
 bool IR_Enable = false;    //This flag is used for enable ir remote control mode
 bool detected_flag = false; //This flag is used for enable detected obstacles ahead
@@ -46,9 +34,12 @@ void setup() {
   // put your setup code here, to run once:
   uint8_t temp;
   Serial.begin(9600);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
   neckControllerServoMotor.attach(10);
   neckControllerServoMotor.write(90);
-  moveStop();
+  tone(12, 800, 500);
+  delay(2000);
 }
 void loop() {
   // put your main code here, to run repeatedly:
@@ -66,10 +57,8 @@ void loop() {
           temp = 0;
           smartEnable = false;
           detected_flag = true;
-          for (uint8_t i = 0; i < 3; i++)
-            detecteVal = detecteVal + readPing();
-          detecteVal = detecteVal / 3;
-          if ((detecteVal > 0) && (detecteVal < 30) ) {
+          range();
+          if (S <= 30) {
             moveStop();
           }
           else
@@ -146,10 +135,8 @@ void loop() {
       temp = 0;
       Serial.println(F(" Move forward"));
       detected_flag = true;
-      for (uint8_t i = 0; i < 3; i++)
-        detecteVal = detecteVal + readPing();
-      detecteVal = detecteVal / 3;
-      if ((detecteVal > 0) && (detecteVal < 30) ) {
+      range();
+      if (S <= 30) {
         moveStop();
       }
       else
@@ -187,192 +174,98 @@ void loop() {
     }
   }
   if (detected_flag) {
-    for (uint8_t i = 0; i < 3; i++)
-     detecteVal = detecteVal + readPing();
-     detecteVal = detecteVal / 3;
-    if ((detecteVal > 0) && (detecteVal < 30) )
+    range();
+    if (S <= 30) {
       moveStop();
+    }
   }
   if (smartEnable) {
-    checkForward();
-    checkPath();
-  }
-
-
-}
-
-
-int readPing() {
-  delay(70);
-  unsigned int uS = sonar.ping();
-  int cm = uS / US_ROUNDTRIP_CM;
-  return cm;
-}
-void checkPath() {
-  int i = 0;
-  int curLeft = 0;
-  int curFront = 0;
-  int curRight = 0;
-  int curDist = 0;
-  uint16_t temp = 0;
-  if (Serial.available())
-    i = Serial.read();
-  if (i == 0x05) {
     neckControllerServoMotor.write(90);
-    moveStop();
-    delay(100);
-    neckControllerServoMotor.detach();
-  } else
-  { neckControllerServoMotor.write(150);
-    delay(90);
-    for (pos = 160; pos >= 30; pos -= 20)
-    {
-      neckControllerServoMotor.write(pos);
-      delay(30);
-      checkForward();
-      temp = readPing();
-      if (temp < 3) {
-        moveStop(); continue;
-      }
-      else
-        curDist = temp;
-      if (curDist < TURN_DIST) {
-        maxAngle = pos;
-        changePath();
-      }
-      if (curDist > curDist) {
-        maxAngle = pos;
-      }
-      if (pos > 90 && curDist > curLeft) {
-        curLeft = curDist;
-      }
-      if (pos == 90 && curDist > curFront) {
-        curFront = curDist;
-      }
-      if (pos < 90 && curDist > curRight) {
-        curRight = curDist;
-      }
+    range();
+    if (S <= TURN_DIST ) {
+      turn();
+    } else if (S > 40) {
+      moveForward();
     }
-    maxLeft = curLeft;
-    maxRight = curRight;
-    maxFront = curFront;
   }
 }
-void setCourse() {
-  if (maxAngle > 90) {
-    turnRight();
-  }
-  if (maxAngle < 90) {
-    turnLeft();
-  }
-  maxLeft = 0;
-  maxRight = 0;
-  maxFront = 0;
-}
-void checkCourse() {
-  moveBackward();
-  delay(200);
+
+void turn() {
   moveStop();
-  setCourse();
-}
-void changePath() {
-  checkCourse();
-  if (pos < 90) {
-    lookLeft();
-  }
-  if (pos > 90) {
-    lookRight();
-  }
-}
-void checkForward()
-{
-  if (motorSet == "FORWARD")
-  {
-    leftMotor.run(FORWARD);
-    rightMotor.run(FORWARD);
-  }
-}
-void checkBackward() {
-  if (motorSet == "BACKWARD") {
-    leftMotor.run(BACKWARD);
-    rightMotor.run(BACKWARD);
+  neckControllerServoMotor.write(150);
+  delay(500);
+  range();
+  Sleft = S;
+  neckControllerServoMotor.write(90);
+  delay(500);
+  neckControllerServoMotor.write(30);
+  delay(500);
+  range();
+  Sright = S;
+  neckControllerServoMotor.write(90);
+  delay(500);
+  if (Sleft <= TURN_DIST && Sright <= TURN_DIST) {
+    moveBackward();
+    delay(500);
+    int x = random(1);
+    if (x = 0) {
+      turnRight();
+    }
+    else {
+      turnLeft();
+    }
+  } else {
+    if (Sleft >= Sright) {
+      turnLeft();
+    } else {
+      turnRight();
+    }
   }
 }
 
-void moveStop() {
-  leftMotor.run(RELEASE);
-  rightMotor.run(RELEASE);
+void range() {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(20);
+  digitalWrite(trig, LOW);
+  int distance = pulseIn(echo, HIGH);
+  distance = distance / 58;
+  S = distance;
+  if (S < TURN_DIST) {
+    tone(12, 800, 50);
+    delay(50);
+  }
 }
-
 void moveForward() {
-  motorSet = "FORWARD";
   leftMotor.run(FORWARD);
   rightMotor.run(FORWARD);
-  for (speedSet = 0; speedSet < MAX_SPEED; speedSet += 2)
-  {
-    leftMotor.setSpeed(speedSet + MOTORS_CALIBRATION_OFFSET);
-    rightMotor.setSpeed(speedSet);
-    delay(5);
-  }
-}
-
-void moveBackward() {
-  motorSet = "BACKWARD";
-  leftMotor.run(BACKWARD);
-  rightMotor.run(BACKWARD);
-  for (speedSet = 0; speedSet < MAX_SPEED; speedSet += 2)
-  {
-    leftMotor.setSpeed(speedSet);
-    rightMotor.setSpeed(speedSet + MOTORS_CALIBRATION_OFFSET);
-    delay(5);
-  }
-}
-void turnRight() {
-  motorSet = "RIGHT";
-  leftMotor.run(FORWARD);
-  rightMotor.run(BACKWARD);
-  if (smartEnable) {
-    delay(80);
-    motorSet = "FORWARD";
-    leftMotor.run(FORWARD);
-    rightMotor.run(FORWARD);
-  }
-  else {
-    for (speedSet = 0; speedSet < TURN_MAX_SPEED; speedSet += 2)
-    {
-      leftMotor.setSpeed(speedSet);
-      rightMotor.setSpeed(speedSet + MOTORS_CALIBRATION_OFFSET);
-      delay(5);
-    }
-  }
+  rightMotor.setSpeed(speedSet);
+  leftMotor.setSpeed(speedSet);
 }
 void turnLeft() {
-  motorSet = "LEFT";
   leftMotor.run(BACKWARD);
   rightMotor.run(FORWARD);
-  if (smartEnable) {
-    delay(80);
-    motorSet = "FORWARD";
-    leftMotor.run(FORWARD);
-    rightMotor.run(FORWARD);
-  }
-  else {
-    for (speedSet = 0; speedSet < TURN_MAX_SPEED; speedSet += 2)
-    {
-      leftMotor.setSpeed(speedSet);
-      rightMotor.setSpeed(speedSet + MOTORS_CALIBRATION_OFFSET);
-      delay(5);
-    }
-  }
+  leftMotor.setSpeed(speedSet);
+  rightMotor.setSpeed(speedSet);
+  delay(400);
+  moveStop();
+}
+void turnRight() {
+  leftMotor.run(FORWARD);
+  rightMotor.run(BACKWARD);
+  leftMotor.setSpeed(speedSet);
+  rightMotor.setSpeed(speedSet);
+  delay(400);
+  moveStop();
+}
+void moveBackward() {
+  leftMotor.run(BACKWARD);
+  rightMotor.run(BACKWARD);
+  leftMotor.setSpeed(speedSet);
+  rightMotor.setSpeed(speedSet);
+}
+void moveStop() {
+  leftMotor.run(RELEASE); rightMotor.run(RELEASE);
 }
 
-void lookRight() {
-  rightMotor.run(BACKWARD);
-  delay(400);
-  rightMotor.run(FORWARD);
-}
-void lookLeft() {
-  leftMotor.run(BACKWARD);
-  delay(400);
-  leftMotor.run(FORWARD);
-}
