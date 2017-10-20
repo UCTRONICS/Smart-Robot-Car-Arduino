@@ -7,14 +7,21 @@
 // We optimize the IR control code for more sensitive control.
 // When there are some obstacles ahead, the car will stop.
 //video link: https://youtu.be/0FB7J-Qzcag
+/***********************[NOTICE]*********************************
+  We can't guarantee that the motor load
+  is exactly the same, so it increases the compensation
+  factor. You should adjust them to suit for your motor
+****************************************************************/
+#define leftFactor 10
+#define rightFactor 5
+#define speedSet  150
 
-
+#define TURN_DIST 40
 #include <AFMotor.h>
 #include <Servo.h>
 #include "ArducamNEC.h"
 
-#define TURN_DIST 40
-#define speedSet  150
+
 
 ArducamNEC myIR(2);
 AF_DCMotor leftMotor(3, MOTOR34_64KHZ);
@@ -38,7 +45,6 @@ void setup() {
   pinMode(echo, INPUT);
   neckControllerServoMotor.attach(10);
   neckControllerServoMotor.write(90);
-  tone(12, 800, 500);
   delay(2000);
 }
 void loop() {
@@ -184,7 +190,7 @@ void loop() {
     range();
     if (S <= TURN_DIST ) {
       turn();
-    } else if (S > 40) {
+    } else if (S > TURN_DIST) {
       moveForward();
     }
   }
@@ -233,37 +239,36 @@ void range() {
   distance = distance / 58;
   S = distance;
   if (S < TURN_DIST) {
-    tone(12, 800, 50);
     delay(50);
   }
 }
 void moveForward() {
   leftMotor.run(FORWARD);
   rightMotor.run(FORWARD);
-  rightMotor.setSpeed(speedSet);
-  leftMotor.setSpeed(speedSet);
+  leftMotor.setSpeed(speedSet + leftFactor);
+  rightMotor.setSpeed(speedSet + rightFactor);
 }
 void turnLeft() {
   leftMotor.run(BACKWARD);
   rightMotor.run(FORWARD);
-  leftMotor.setSpeed(speedSet);
-  rightMotor.setSpeed(speedSet);
+  leftMotor.setSpeed(speedSet + leftFactor);
+  rightMotor.setSpeed(speedSet + rightFactor);
   delay(400);
   moveStop();
 }
 void turnRight() {
   leftMotor.run(FORWARD);
   rightMotor.run(BACKWARD);
-  leftMotor.setSpeed(speedSet);
-  rightMotor.setSpeed(speedSet);
+  leftMotor.setSpeed(speedSet + leftFactor);
+  rightMotor.setSpeed(speedSet + rightFactor);
   delay(400);
   moveStop();
 }
 void moveBackward() {
   leftMotor.run(BACKWARD);
   rightMotor.run(BACKWARD);
-  leftMotor.setSpeed(speedSet);
-  rightMotor.setSpeed(speedSet);
+  leftMotor.setSpeed(speedSet + leftFactor);
+  rightMotor.setSpeed(speedSet + rightFactor);
 }
 void moveStop() {
   leftMotor.run(RELEASE); rightMotor.run(RELEASE);
