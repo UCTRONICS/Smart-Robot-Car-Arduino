@@ -7,6 +7,8 @@
 // We optimize the IR control code for more sensitive control.
 // When there are some obstacles ahead, the car will stop.
 //video link: https://youtu.be/0FB7J-Qzcag
+//Before uploading this demo,you should remove your HC-05 module.
+//If not you can not uploading to the UNO board.
 /***********************[NOTICE]*********************************
   We can't guarantee that the motor load
   is exactly the same, so it increases the compensation
