@@ -31,7 +31,7 @@ String strReceived = "";
 
 //The center Angle of two steering engines.
 
-byte servoXCenterPoint = 87;
+byte servoXCenterPoint = 88;
 byte servoYCenterPoint = 70;
 
 //The maximum Angle of two steering gear
