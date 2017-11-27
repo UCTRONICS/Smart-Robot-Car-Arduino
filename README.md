@@ -20,7 +20,7 @@ Arducam smart robot car will keep updating...
 
 How to use RobotCar app?
 
-![Alt text](http://github.com/chenyufeng1991/NewsClient/raw/master/Screenshots/2.png))
+![Alt text](http://github.com/chenyufeng1991/NewsClient/raw/master/Screenshots/2.png)
 
 
 
