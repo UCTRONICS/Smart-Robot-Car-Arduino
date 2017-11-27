@@ -24,10 +24,15 @@ Arducam smart robot car will keep updating...
 https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/WIFI_APP/RobotCar.apk
 
 2. Connect to the Robot Car
+
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/image/1.png)
+
 3. Open the ‘RobotCar’ app and this is the boot screen
+
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/image/2.png)
+
 4.If the app remind “Can’t connect car! Please check Network!” Don’t worry, you should check your wifi to ensure you have connected to the ‘UCTRONICS’ hotspot
+
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/image/3.png)
 
 
