@@ -68,9 +68,26 @@ https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/WIFI_APP/RobotCa
 
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/image/10.png)
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/image/11.png)
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/image/12.png)
+
 12.Calibration and speed setting 
 You can change the value of Froward to compensate for the speed difference of the motor.
 You can change the value of basic speed to control the motor speed.
+
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/image/13.png)
+
+13. Exit the application
+
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/image/14.png)
+
+NOTICE:
+When using the function of taking picture or recording video, you need to get the right to read or write the memory. The detail steps are as follows:
+
+
+
+
+
+
 
 
 
