@@ -107,6 +107,10 @@
 // Constants that the user passes in to the motor calls
 #define FORWARD 1
 #define BACKWARD 2
+
+#define FORWARD2 2
+#define BACKWARD2 1
+
 #define BRAKE 3
 #define RELEASE 4
 

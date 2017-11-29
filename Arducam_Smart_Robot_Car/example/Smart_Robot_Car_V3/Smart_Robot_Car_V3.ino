@@ -1,14 +1,11 @@
 //Smart_Robot_Car_V3 demo (C)2017 Lee
-// This version support wifi camera
-//This demo need top be used in combination with Android software
-//With this demo, you can make your Robot car take picture and record video.
-//NOTICE: Before uploadig this demo, you should remove the WIFI board from UNO.
 
 #include <NewPing.h>
 #include <AFMotor.h>
 #include <Servo.h>
 #include <Wire.h>
 
+#define MOTORS_CALIBRATION_OFFSET 0
 #define TRIG_PIN A2
 #define ECHO_PIN A3
 #define MAX_DISTANCE_POSSIBLE 1000
@@ -31,6 +28,7 @@ byte commandAvailable = false;
 String strReceived = "";
 
 //The center Angle of two steering engines.
+
 byte servoXCenterPoint = 88;
 byte servoYCenterPoint = 70;
 
@@ -41,26 +39,20 @@ byte servoYmax = 130;
 //The minimum Angle of two steering gear
 byte servoXmini = 10;
 byte servoYmini = 10;
-
 //The current Angle of the two steering engines is used for retransmission
 byte servoXPoint = 0;
 byte servoYPoint = 0;
 
-//The speed of the motor
 byte leftspeed = 0;
 byte rightspeed = 0;
-
-//Step precision
 byte servoStep = 4;
-
-//status flag
 String motorSet = "";
+int speedSet = 0;
+int detecteVal = 0;
 bool detected_flag = false;
 bool stopFlag = false;
 bool timeFlag = true;
 long currentTime = 0;
-
-
 
 AF_DCMotor leftMotor1(3, MOTOR34_64KHZ);
 AF_DCMotor rightMotor1(4, MOTOR34_64KHZ);
@@ -92,10 +84,9 @@ void loop()
   if (commandAvailable) {
     processCommand(strReceived);
     strReceived = "";
-    commandAvailable = false;
+    commandAvailable = false; 
   }
 }
-
 void getSerialLine()
 {
   static int temp = 0;
@@ -332,8 +323,9 @@ void moveForward(void)
   motorSet = "FORWARD";
   leftMotor1.run(FORWARD);
   rightMotor1.run(FORWARD);
-  leftMotor2.run(FORWARD);
-  rightMotor2.run(FORWARD);
+   motorSet = "FORWARD2";
+  leftMotor2.run(FORWARD2);
+  rightMotor2.run(FORWARD2);
   leftMotor1.setSpeed(MAX_SPEED_LEFT);
   rightMotor1.setSpeed(MAX_SPEED_RIGHT);
   leftMotor2.setSpeed(MAX_SPEED_LEFT);
@@ -356,8 +348,8 @@ void movePianZhuan (String mode)
     }
     leftMotor1.run(FORWARD);
     rightMotor1.run(FORWARD);
-    leftMotor2.run(FORWARD);
-    rightMotor2.run(FORWARD);
+    leftMotor2.run(FORWARD2);
+    rightMotor2.run(FORWARD2);
   }
   if (!(mode.indexOf("down") < 0))
   {
@@ -373,8 +365,8 @@ void movePianZhuan (String mode)
     }
     leftMotor1.run(BACKWARD);
     rightMotor1.run(BACKWARD);
-    leftMotor2.run(BACKWARD);
-    rightMotor2.run(BACKWARD);
+    leftMotor2.run(BACKWARD2);
+    rightMotor2.run(BACKWARD2);
   }
   leftMotor1.setSpeed(MAX_SPEED_LEFT_A);
   rightMotor1.setSpeed(MAX_SPEED_RIGHT_A);
@@ -386,8 +378,8 @@ void moveBackward(void)
   motorSet = "BACKWARD";
   leftMotor1.run(BACKWARD);
   rightMotor1.run(BACKWARD);
-  leftMotor2.run(BACKWARD);
-  rightMotor2.run(BACKWARD);
+  leftMotor2.run(BACKWARD2);
+  rightMotor2.run(BACKWARD2);
   leftMotor1.setSpeed(MAX_SPEED_LEFT);
   rightMotor1.setSpeed(MAX_SPEED_RIGHT);
   leftMotor2.setSpeed(MAX_SPEED_LEFT);
@@ -399,8 +391,8 @@ void turnRight(void)
   motorSet = "RIGHT";
   leftMotor1.run(FORWARD);
   rightMotor1.run(BACKWARD);
-  leftMotor2.run(FORWARD);
-  rightMotor2.run(BACKWARD);
+  leftMotor2.run(FORWARD2);
+  rightMotor2.run(BACKWARD2);
   MAX_SPEED_LEFT_AR = MAX_SPEED_LEFT > 200 ? 200 : MAX_SPEED_LEFT;
   MAX_SPEED_RIGHT_AR = MAX_SPEED_RIGHT > 200 ? 200 : MAX_SPEED_RIGHT;
   leftMotor1.setSpeed(MAX_SPEED_LEFT_AR);
@@ -414,8 +406,8 @@ void turnLeft(void)
   motorSet = "LEFT";
   leftMotor1.run(BACKWARD);
   rightMotor1.run(FORWARD);
-  leftMotor2.run(BACKWARD);
-  rightMotor2.run(FORWARD);
+  leftMotor2.run(BACKWARD2);
+  rightMotor2.run(FORWARD2);
   MAX_SPEED_LEFT_AL = MAX_SPEED_LEFT > 200 ? 200 : MAX_SPEED_LEFT;
   MAX_SPEED_RIGHT_AL = MAX_SPEED_RIGHT > 200 ? 200 : MAX_SPEED_RIGHT;
   leftMotor1.setSpeed(MAX_SPEED_LEFT_AL);
