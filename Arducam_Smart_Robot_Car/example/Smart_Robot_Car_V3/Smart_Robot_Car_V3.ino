@@ -1,6 +1,5 @@
 //Smart_Robot_Car_V3 demo (C)2017 Lee
 
-#include <NewPing.h>
 #include <AFMotor.h>
 #include <Servo.h>
 #include <Wire.h>
@@ -58,7 +57,6 @@ AF_DCMotor leftMotor1(3, MOTOR34_64KHZ);
 AF_DCMotor rightMotor1(4, MOTOR34_64KHZ);
 AF_DCMotor leftMotor2(1, MOTOR34_64KHZ);
 AF_DCMotor rightMotor2(2, MOTOR34_64KHZ);
-NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE_POSSIBLE);
 
 Servo servoX;
 Servo servoY;
@@ -69,6 +67,8 @@ void setup()
   pinMode(middleSensor, INPUT_PULLUP);
   pinMode(rightSensor, INPUT_PULLUP);
   pinMode(buzzerPin, OUTPUT);
+   pinMode(ECHO_PIN, INPUT); //Set the connection pin output mode Echo pin
+   pinMode(TRIG_PIN, OUTPUT);//Set the connection pin output mode trog pin
   servoX.attach(9);
   servoY.attach(10);
   Serial.begin(115200);
@@ -84,7 +84,7 @@ void loop()
   if (commandAvailable) {
     processCommand(strReceived);
     strReceived = "";
-    commandAvailable = false; 
+    commandAvailable = false;
   }
 }
 void getSerialLine()
@@ -104,8 +104,9 @@ void getSerialLine()
         if (detected_flag) {
           temp = readPing();
           if ( temp <= 40 && temp > 0 ) {
-            moveStop();
-          }
+            moveStop(); digitalWrite(buzzerPin, HIGH);
+          } else
+            digitalWrite(buzzerPin, LOW);
         }
       }
       return;
@@ -133,20 +134,28 @@ void processCommand(String input)
   if (command == "MD_up")
   {
     detected_flag = true;
-    moveForward();
+    int temp = readPing();
+    if ( temp <= 40 && temp > 0 ) {
+      moveStop();
+      digitalWrite(buzzerPin, HIGH);
+    } else {
+      digitalWrite(buzzerPin, LOW);
+      moveForward();
+    }
+
   } else if (command == "MD_up_left" || command == "MD_up_right" || command == "MD_down_left" || command == "MD_down_right")
   {
     movePianZhuan (command.substring(command.indexOf("_") + 1));
-    detected_flag = false;
+    detected_flag = false;digitalWrite(buzzerPin, LOW);
   } else if (command == "MD_down")
   {
-    moveBackward(); detected_flag = false;
+    moveBackward(); detected_flag = false;digitalWrite(buzzerPin, LOW);
   } else if (command == "MD_left")
   {
-    turnLeft(); detected_flag = false;
+    turnLeft(); detected_flag = false;digitalWrite(buzzerPin, LOW);
   } else if (command == "MD_right")
   {
-    turnRight(); detected_flag = false;
+    turnRight(); detected_flag = false;digitalWrite(buzzerPin, LOW);
   } else if (command == "MD_stop")
   {
     moveStop();
@@ -323,7 +332,7 @@ void moveForward(void)
   motorSet = "FORWARD";
   leftMotor1.run(FORWARD);
   rightMotor1.run(FORWARD);
-   motorSet = "FORWARD2";
+  motorSet = "FORWARD2";
   leftMotor2.run(FORWARD2);
   rightMotor2.run(FORWARD2);
   leftMotor1.setSpeed(MAX_SPEED_LEFT);
@@ -482,10 +491,32 @@ void moveTrack(void)
 void SendMessage(String data) {
   Serial.println(data);
 }
-int readPing() {
-  delay(70);
-  unsigned int uS = sonar.ping();
-  int cm = uS / US_ROUNDTRIP_CM;
-  return cm;
+int readPing()
+{
+  // establish variables for duration of the ping,
+  // and the distance result in inches and centimeters:
+  long duration, cm;
+  // The PING))) is triggered by a HIGH pulse of 2 or more microseconds.
+  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
+  pinMode(TRIG_PIN, OUTPUT);
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(TRIG_PIN, LOW);
+
+  pinMode(ECHO_PIN, INPUT);
+  duration = pulseIn(ECHO_PIN, HIGH);
+
+  // convert the time into a distance
+  cm = microsecondsToCentimeters(duration);
+  return cm ;
 }
 
+long microsecondsToCentimeters(long microseconds)
+{
+  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
+  // The ping travels out and back, so to find the distance of the
+  // object we take half of the distance travelled.
+  return microseconds / 29 / 2;
+}
