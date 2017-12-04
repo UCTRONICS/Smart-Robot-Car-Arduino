@@ -26,9 +26,11 @@ The  detail  instructions:
 
 > Choose the File -> Examples -> UCTRONICS_Smart_Robot_Car -> example ->[example you choeesed] 
 
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/3.jpeg)
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/7.jpeg)
 
 >Then uploading the demo to your Robot Car.
+
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/4.jpeg)
 
 [NOTICE:]
 
