@@ -33,11 +33,13 @@ The  detail  instructions:
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/4.jpeg)
 
 [NOTICE:]
+For K0069 ，you should use Smart_Robot_Car_V1 demo.For K0070, you should use Smart_Robot_Car_V2.
 
-For Smart_Robot_Car_V1 demo，you should install your ultrasonic and servo and install the motor to M3M4.
 
 
-For Smart_Robot_Car_V2 demo, you should add bluebooth and IR controller.
+
+
+
 
 
 
