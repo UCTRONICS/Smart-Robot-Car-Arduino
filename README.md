@@ -1,10 +1,14 @@
 # Smart-Robot-Car-Arduino
 
-UCTRONICS has updated code library.
+# UCTRONICS has updated code library.
 
-Let us know if you need any help or have any sugestions.
+# [NOTICE:]
 
-Our email address is : support@uctronics.com
+# For K0069 ，you should use Smart_Robot_Car_V1 demo. For K0070, you should use Smart_Robot_Car_V2.
+
+# Let us know if you need any help or have any sugestions.
+
+# Our email address is : support@uctronics.com
 
 The  detail  instructions:
 
@@ -32,9 +36,6 @@ The  detail  instructions:
 
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/4.jpeg)
 
-[NOTICE:]
-
-For K0069 ，you should use Smart_Robot_Car_V1 demo.For K0070, you should use Smart_Robot_Car_V2.
 
 We add module test code:
 
