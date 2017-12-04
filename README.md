@@ -22,7 +22,11 @@ The  detail  instructions:
 
 > Restart your Arduino IDE and connect your Robot Car. Choose Tools -> port -yout serial port number
 
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/3.jpeg)
+
 > Choose the File -> Examples -> UCTRONICS_Smart_Robot_Car -> example ->[example you choeesed] 
+
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/3.jpeg)
 
 >Then uploading the demo to your Robot Car.
 
