@@ -1,20 +1,48 @@
 # Smart-Robot-Car-Arduino
 
-The video demo link:
+UCTRONICS has updated code library.
 
-https://youtu.be/0FB7J-Qzcag
+Let us know if you need any help or have any sugestions.
 
-Ardcam smart robot car V1 : support smart mode
+our email is : support@uctronics.com
 
-Ardcam smart robot car V2 : add support bluetooth control and IR control
+The  detail  instructions:
 
-We optimize the IR control code for more sensitive control.
+> Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
 
-We optimize the UCTRONICS_Car_Controller
+> Download our UCTRONICS_Smart_Robot_Car library from https://github.com/UCTRONICS/Smart-Robot-Car-Arduino.git
 
-When there are some obstacles ahead, the car will stop
+> Unzip the Smart-Robot-Car-Arduino and copy the UCTRONICS_Smart_Robot_Car library to ..\Arduino\libraries path
 
-Arducam smart robot car will keep updating...
+> Restart your Arduino IDE and connect your Robot Car. Choose Tools -> port -yout serial port number
+
+> Choose the File -> Examples -> UCTRONICS_Smart_Robot_Car -> example ->[example you choeesed] 
+
+>Then uploading the demo to your Robot Car.
+
+[NOTICE:]
+
+For Smart_Robot_Car_V1 demo，you should install your ultrasonic and servo and install the motor to M3M4.
+
+For Smart_Robot_Car_V2 demo, you should add bluebooth and IR controller.
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
 
 
 
