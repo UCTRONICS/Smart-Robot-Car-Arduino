@@ -33,7 +33,17 @@ The  detail  instructions:
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/4.jpeg)
 
 [NOTICE:]
+
 For K0069 ，you should use Smart_Robot_Car_V1 demo.For K0070, you should use Smart_Robot_Car_V2.
+
+We add module test code:
+For motor:
+https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/MotorTest/MotorTest.ino
+For servo:
+https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/NECTest/NECTest.ino
+For ultrasonic:
+https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/ultrasonicTest/ultrasonicTest.ino
+
 
 
 
