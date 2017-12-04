@@ -19,19 +19,18 @@
 #define speedSet  150
 
 #define TURN_DIST 40
-#include <AFMotor.h>
+#include <UCMotor.h>
 #include <Servo.h>
-#include "ArducamNEC.h"
+#include "UCNEC.h"
 
+#define TRIG_PIN A2
+#define ECHO_PIN A3
 
-
-ArducamNEC myIR(2);
-AF_DCMotor leftMotor(3, MOTOR34_64KHZ);
-AF_DCMotor rightMotor(4, MOTOR34_64KHZ);
+UCNEC myIR(2);
+UC_DCMotor leftMotor(3, MOTOR34_64KHZ);
+UC_DCMotor rightMotor(4, MOTOR34_64KHZ);
 Servo neckControllerServoMotor;
 
-int trig = A2;
-int echo = A3;
 unsigned int S;
 unsigned int Sleft;
 unsigned int Sright;
@@ -43,8 +42,8 @@ void setup() {
   // put your setup code here, to run once:
   uint8_t temp;
   Serial.begin(9600);
-  pinMode(trig, OUTPUT);
-  pinMode(echo, INPUT);
+  pinMode(ECHO_PIN, INPUT); //Set the connection pin output mode Echo pin
+  pinMode(TRIG_PIN, OUTPUT);//Set the connection pin output mode trog pin
   neckControllerServoMotor.attach(10);
   neckControllerServoMotor.write(90);
   delay(2000);
@@ -65,7 +64,7 @@ void loop() {
           temp = 0;
           smartEnable = false;
           detected_flag = true;
-          range();
+          S = readPing();
           if (S <= 30) {
             moveStop();
           }
@@ -143,7 +142,7 @@ void loop() {
       temp = 0;
       Serial.println(F(" Move forward"));
       detected_flag = true;
-      range();
+      S = readPing();
       if (S <= 30) {
         moveStop();
       }
@@ -182,14 +181,14 @@ void loop() {
     }
   }
   if (detected_flag) {
-    range();
+    S = readPing();
     if (S <= 30) {
       moveStop();
     }
   }
   if (smartEnable) {
     neckControllerServoMotor.write(90);
-    range();
+    S = readPing();
     if (S <= TURN_DIST ) {
       turn();
     } else if (S > TURN_DIST) {
@@ -202,13 +201,13 @@ void turn() {
   moveStop();
   neckControllerServoMotor.write(150);
   delay(500);
-  range();
+  S = readPing();
   Sleft = S;
   neckControllerServoMotor.write(90);
   delay(500);
   neckControllerServoMotor.write(30);
   delay(500);
-  range();
+  S = readPing();
   Sright = S;
   neckControllerServoMotor.write(90);
   delay(500);
@@ -230,20 +229,36 @@ void turn() {
     }
   }
 }
-
-void range() {
-  digitalWrite(trig, LOW);
+int readPing()
+{
+  // establish variables for duration of the ping,
+  // and the distance result in inches and centimeters:
+  long duration, cm;
+  // The PING))) is triggered by a HIGH pulse of 2 or more microseconds.
+  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
+  pinMode(TRIG_PIN, OUTPUT);
+  digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
-  digitalWrite(trig, HIGH);
-  delayMicroseconds(20);
-  digitalWrite(trig, LOW);
-  int distance = pulseIn(echo, HIGH);
-  distance = distance / 58;
-  S = distance;
-  if (S < TURN_DIST) {
-    delay(50);
-  }
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(TRIG_PIN, LOW);
+
+  pinMode(ECHO_PIN, INPUT);
+  duration = pulseIn(ECHO_PIN, HIGH);
+
+  // convert the time into a distance
+  cm = microsecondsToCentimeters(duration);
+  return cm ;
 }
+
+long microsecondsToCentimeters(long microseconds)
+{
+  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
+  // The ping travels out and back, so to find the distance of the
+  // object we take half of the distance travelled.
+  return microseconds / 29 / 2;
+}
+
 void moveForward() {
   leftMotor.run(FORWARD);
   rightMotor.run(FORWARD);

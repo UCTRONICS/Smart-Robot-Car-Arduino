@@ -1,14 +1,15 @@
 #######################################
-# Syntax Coloring Map for AFMotor
+# Syntax Coloring Map for UCMotor
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-AF_DCMotor	KEYWORD1
-AF_Stepper	KEYWORD1
-
+UC_DCMotor	KEYWORD1
+UC_Stepper	KEYWORD1
+UCMotor	KEYWORD1
+UCNEC	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################

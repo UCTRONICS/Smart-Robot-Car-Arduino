@@ -1,5 +1,5 @@
-#ifndef ArducamNEC_h
-#define ArducamNEC_h
+#ifndef UCNEC_h
+#define UCNEC_h
 
 
 
@@ -103,10 +103,10 @@ static volatile struct {
 } irparams ;
 
 // main class
-class ArducamNEC
+class UCNEC
 {
   public:
-    ArducamNEC(int irpin);
+    UCNEC(int irpin);
     unsigned long read();
     void begin();
     int available() ;

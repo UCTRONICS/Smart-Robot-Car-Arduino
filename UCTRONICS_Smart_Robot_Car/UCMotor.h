@@ -1,12 +1,11 @@
-// Adafruit Motor shield library
-// copyright Adafruit Industries LLC, 2009
+// UCTRONICS Motor shield library
 // this code is public domain, enjoy!
 
 /*
  * Usage Notes:
  * For PIC32, all features work properly with the following two exceptions:
  *
- * 1) Because the PIC32 only has 5 PWM outputs, and the AFMotor shield needs 6
+ * 1) Because the PIC32 only has 5 PWM outputs, and the UCMotor shield needs 6
  *    to completely operate (four for motor outputs and two for RC servos), the
  *    M1 motor output will not have PWM ability when used with a PIC32 board.
  *    However, there is a very simple workaround. If you need to drive a stepper
@@ -29,8 +28,8 @@
 // <BPS> 09/15/2012 Modified for use with chipKIT boards
 
 
-#ifndef _AFMotor_h_
-#define _AFMotor_h_
+#ifndef _UCMotor_h_
+#define _UCMotor_h_
 
 #include <inttypes.h>
 #if defined(__AVR__)
@@ -144,20 +143,20 @@
 #define MOTORENABLE 7
 #define MOTORDATA 8
 
-class AFMotorController
+class UCMotorController
 {
   public:
-    AFMotorController(void);
+    UCMotorController(void);
     void enable(void);
-    friend class AF_DCMotor;
+    friend class UC_DCMotor;
     void latch_tx(void);
     uint8_t TimerInitalized;
 };
 
-class AF_DCMotor
+class UC_DCMotor
 {
  public:
-  AF_DCMotor(uint8_t motornum, uint8_t freq = DC_MOTOR_PWM_RATE);
+  UC_DCMotor(uint8_t motornum, uint8_t freq = DC_MOTOR_PWM_RATE);
   void run(uint8_t);
   void setSpeed(uint8_t);
 
@@ -165,9 +164,9 @@ class AF_DCMotor
   uint8_t motornum, pwmfreq;
 };
 
-class AF_Stepper {
+class UC_Stepper {
  public:
-  AF_Stepper(uint16_t, uint8_t);
+  UC_Stepper(uint16_t, uint8_t);
   void step(uint16_t steps, uint8_t dir,  uint8_t style = SINGLE);
   void setSpeed(uint16_t);
   uint8_t onestep(uint8_t dir, uint8_t style);

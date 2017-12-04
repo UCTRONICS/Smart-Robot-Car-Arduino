@@ -1,16 +1,16 @@
-// ArducamNEC
+// UCNEC
 // Lee
 
 // #include "WProgram.h"  Deprecated. Arduino.h instead
 #include "Arduino.h"
-#include "ArducamNEC.h"
-ArducamNEC::ArducamNEC(int irpin)
+#include "UCNEC.h"
+UCNEC::UCNEC(int irpin)
 {
   irparams.irpin = irpin ;
 }
 
 // initialization
-void ArducamNEC::begin() {
+void UCNEC::begin() {
   // setup pulse clock timer interrupt
   #if defined(TIM2_EN)
   TCCR2A = 0;  // normal mode
@@ -52,7 +52,7 @@ void ArducamNEC::begin() {
 }
 
 // return next IR code from buffer, or -1 if none
-unsigned long ArducamNEC::read()
+unsigned long UCNEC::read()
 {
   unsigned long ircode ;
   unsigned long ircode_temp ;
@@ -73,7 +73,7 @@ unsigned long ArducamNEC::read()
 }
 
 // return number of IR codes in buffer
-int ArducamNEC::available()
+int UCNEC::available()
 {
   int n ;
   n = irparams.fptr - irparams.rptr ;
@@ -82,7 +82,7 @@ int ArducamNEC::available()
   return(n) ;
 }
 // flush IR code buffer
-void ArducamNEC::flush()
+void UCNEC::flush()
 {
   irparams.rptr = irparams.fptr ;
 }

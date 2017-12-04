@@ -1,5 +1,4 @@
-// Adafruit Motor shield library
-// copyright Adafruit Industries LLC, 2009
+// UCTRONOICS Motor shield library
 // this code is public domain, enjoy!
 
 
@@ -12,7 +11,7 @@
   #include "WProgram.h"
 #endif
 
-#include "AFMotor.h"
+#include "UCMotor.h"
 
 
 
@@ -24,11 +23,11 @@ uint8_t microstepcurve[] = {0, 50, 98, 142, 180, 212, 236, 250, 255};
 uint8_t microstepcurve[] = {0, 25, 50, 74, 98, 120, 141, 162, 180, 197, 212, 225, 236, 244, 250, 253, 255};
 #endif
 
-AFMotorController::AFMotorController(void) {
+UCMotorController::UCMotorController(void) {
     TimerInitalized = false;
 }
 
-void AFMotorController::enable(void) {
+void UCMotorController::enable(void) {
   // setup the latch
   /*
   LATCH_DDR |= _BV(LATCH);
@@ -50,7 +49,7 @@ void AFMotorController::enable(void) {
 }
 
 
-void AFMotorController::latch_tx(void) {
+void UCMotorController::latch_tx(void) {
   uint8_t i;
 
   //LATCH_PORT &= ~_BV(LATCH);
@@ -77,7 +76,7 @@ void AFMotorController::latch_tx(void) {
   digitalWrite(MOTORLATCH, HIGH);
 }
 
-static AFMotorController MC;
+static UCMotorController MC;
 
 /******************************************
                MOTORS
@@ -336,7 +335,7 @@ inline void setPWM4(uint8_t s) {
 #endif
 }
 
-AF_DCMotor::AF_DCMotor(uint8_t num, uint8_t freq) {
+UC_DCMotor::UC_DCMotor(uint8_t num, uint8_t freq) {
   motornum = num;
   pwmfreq = freq;
 
@@ -366,7 +365,7 @@ AF_DCMotor::AF_DCMotor(uint8_t num, uint8_t freq) {
   }
 }
 
-void AF_DCMotor::run(uint8_t cmd) {
+void UC_DCMotor::run(uint8_t cmd) {
   uint8_t a, b;
   switch (motornum) {
   case 1:
@@ -400,7 +399,7 @@ void AF_DCMotor::run(uint8_t cmd) {
   }
 }
 
-void AF_DCMotor::setSpeed(uint8_t speed) {
+void UC_DCMotor::setSpeed(uint8_t speed) {
   switch (motornum) {
   case 1:
     setPWM1(speed); break;
@@ -417,7 +416,7 @@ void AF_DCMotor::setSpeed(uint8_t speed) {
                STEPPERS
 ******************************************/
 
-AF_Stepper::AF_Stepper(uint16_t steps, uint8_t num) {
+UC_Stepper::UC_Stepper(uint16_t steps, uint8_t num) {
   MC.enable();
 
   revsteps = steps;
@@ -461,12 +460,12 @@ AF_Stepper::AF_Stepper(uint16_t steps, uint8_t num) {
   }
 }
 
-void AF_Stepper::setSpeed(uint16_t rpm) {
+void UC_Stepper::setSpeed(uint16_t rpm) {
   usperstep = 60000000 / ((uint32_t)revsteps * (uint32_t)rpm);
   steppingcounter = 0;
 }
 
-void AF_Stepper::release(void) {
+void UC_Stepper::release(void) {
   if (steppernum == 1) {
     latch_state &= ~_BV(MOTOR1_A) & ~_BV(MOTOR1_B) &
       ~_BV(MOTOR2_A) & ~_BV(MOTOR2_B); // all motor pins to 0
@@ -478,7 +477,7 @@ void AF_Stepper::release(void) {
   }
 }
 
-void AF_Stepper::step(uint16_t steps, uint8_t dir,  uint8_t style) {
+void UC_Stepper::step(uint16_t steps, uint8_t dir,  uint8_t style) {
   uint32_t uspers = usperstep;
   uint8_t ret = 0;
 
@@ -515,7 +514,7 @@ void AF_Stepper::step(uint16_t steps, uint8_t dir,  uint8_t style) {
   }
 }
 
-uint8_t AF_Stepper::onestep(uint8_t dir, uint8_t style) {
+uint8_t UC_Stepper::onestep(uint8_t dir, uint8_t style) {
   uint8_t a, b, c, d;
   uint8_t ocrb, ocra;
 
