@@ -51,9 +51,26 @@ For ultrasonic:
 
 https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/ultrasonicTest/ultrasonicTest.ino
 
+For Smart_Robot_Car_V2 demo, you should use our UCTRONICS_Car_Controller_V2 software.
 
+Step1:
 
+> Download our app form https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/BlueTooth%20Tool/UCTRONICS_Car_Controller_V2.apk
 
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/8.jpeg)
+
+Step2
+
+> Search the HC-05 
+
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/9.jpeg)
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/10.jpeg)
+
+Step3
+
+> Connect the HC-05
+
+![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/11.jpeg)
 
 
 
