@@ -4,7 +4,7 @@
 
 # [NOTICE:]
 
-# For K0069 ，you should use Smart_Robot_Car_V1 demo. For K0070, you should use Smart_Robot_Car_V2.
+# For K0065 K0069 ，you should use Smart_Robot_Car_V1 demo. For K0066 K0070, you should use Smart_Robot_Car_V2.
 
 # Let us know if you need any help or have any sugestions.
 
