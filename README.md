@@ -43,7 +43,7 @@ For motor:
 
 https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/MotorTest/MotorTest.ino
 
-For servo:
+For IR:
 
 https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/NECTest/NECTest.ino
 
