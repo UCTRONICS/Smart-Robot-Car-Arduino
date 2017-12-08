@@ -9,11 +9,12 @@
  * GND      GND
  *****************************************/
 #include "UCNEC.h"
-int temp = 0;
+int32_t temp = 0;
 UCNEC myIR(2);
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  myIR.begin();
 }
 void loop() {
   // put your main code here, to run repeatedly:
