@@ -2,6 +2,8 @@
 
 # UCTRONICS has updated code library.
 
+[![IMAGE ALT TEXT](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/video.jpeg)](https://youtu.be/0FB7J-Qzcag "Smart Robot Car Installation")
+
 # [NOTICE:]
 
 # For K0065 K0069 ，you should use Smart_Robot_Car_V1 demo. For K0066 K0070, you should use Smart_Robot_Car_V2.
