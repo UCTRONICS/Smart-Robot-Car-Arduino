@@ -67,7 +67,7 @@ For Smart_Robot_Car_V2 demo, you should use our UCTRONICS_Car_Controller_V2 soft
 
 Step1:
 
-> Download our app form https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/BlueTooth%20Tool/UCTRONICS_Car_Controller_V2.apk
+> Download our app form https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/BlueTooth%20Tool/RobotCar_Controller.apk
 
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/8.jpeg)
 
