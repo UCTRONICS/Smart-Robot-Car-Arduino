@@ -65,24 +65,30 @@ https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart
 
 For Smart_Robot_Car_V2 demo, you should use our UCTRONICS_Car_Controller_V2 software.
 
-Step1:
-
-> Download our app form https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/BlueTooth%20Tool/RobotCar_Controller.apk
+> Step1: Download our app form https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/BlueTooth%20Tool/RobotCar_Controller.apk
 
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/8.jpeg)
 
-Step2
+> Step2: Open the RobotCar_Controller.apk and choose Connected device
 
-> Search the HC-05 
+ ![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt1.png)
+ 
+> Step3: Choose CAR CONTROL MODE
 
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/9.jpeg)
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/10.jpeg)
+![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt2.png)
 
-Step3
+> Step4: Choose RESEARCH .If you are the first conect it skip this step
 
-> Connect the HC-05
+![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt3.png)
 
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/11.jpeg)
+> Step5: choose HC-05, if you are the first connect it, you should input the password"1234"/"0000"
+
+![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt4.png)
+
+> Step6: Control your car using the keyboard.
+
+![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt5.png)
+
 
 
 
