@@ -215,7 +215,7 @@ void turn() {
     moveBackward();
     delay(500);
     int x = random(1);
-    if (x = 0) {
+    if (x == 0) {
       turnRight();
     }
     else {
