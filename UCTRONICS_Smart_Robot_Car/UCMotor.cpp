@@ -338,7 +338,6 @@ inline void setPWM4(uint8_t s) {
 UC_DCMotor::UC_DCMotor(uint8_t num, uint8_t freq) {
   motornum = num;
   pwmfreq = freq;
-
   MC.enable();
 
   switch (num) {
@@ -382,16 +381,70 @@ void UC_DCMotor::run(uint8_t cmd) {
   
   switch (cmd) {
   case FORWARD:
+  if(motornum ==3 || motornum ==4){
     latch_state |= _BV(a);
     latch_state &= ~_BV(b); 
+  }else{
+	  latch_state &= ~_BV(a);
+    latch_state |= _BV(b);    
+  }
     MC.latch_tx();
     break;
   case BACKWARD:
+   if(motornum ==3 || motornum ==4){
     latch_state &= ~_BV(a);
     latch_state |= _BV(b); 
+   }else{
+	latch_state |= _BV(a);
+    latch_state &= ~_BV(b);    
+   }
     MC.latch_tx();
     break;
-  case RELEASE:
+  case LEFT:
+		if(motornum ==3){
+			 a = MOTOR3_A; b = MOTOR3_B;   //backward
+				latch_state &= ~_BV(a);
+				latch_state |= _BV(b); 
+		MC.latch_tx();}
+				else if(motornum ==4){
+				 a = MOTOR4_A; b = MOTOR4_B;
+				  latch_state |= _BV(a);
+					latch_state &= ~_BV(b); 
+					 MC.latch_tx();
+				}else if(motornum ==1){
+			   a = MOTOR1_A; b = MOTOR1_B;
+			    latch_state |= _BV(a);
+				latch_state &= ~_BV(b); 
+				MC.latch_tx();
+			}else if(motornum ==2){
+				  a = MOTOR2_A; b = MOTOR2_B;
+				  latch_state &= ~_BV(a);
+				  latch_state |= _BV(b); 
+				  MC.latch_tx();
+			}	
+	break;
+  case RIGHT:
+	if(motornum ==3){
+			 a = MOTOR3_A; b = MOTOR3_B;   //backward
+				  latch_state |= _BV(a);
+    latch_state &= ~_BV(b); 
+    MC.latch_tx();}
+				else if(motornum ==4){
+				 a = MOTOR4_A; b = MOTOR4_B;
+				 latch_state &= ~_BV(a);
+    latch_state |= _BV(b); 
+    MC.latch_tx();}else if(motornum ==1){
+			   a = MOTOR1_A; b = MOTOR1_B;
+			     latch_state &= ~_BV(a);
+    latch_state |= _BV(b); 
+    MC.latch_tx();}else if(motornum ==2){
+				  a = MOTOR2_A; b = MOTOR2_B;
+				  latch_state |= _BV(a);
+    latch_state &= ~_BV(b); 
+    MC.latch_tx();	
+		}
+	break;
+	case STOP:
     latch_state &= ~_BV(a);     // A and B both low
     latch_state &= ~_BV(b); 
     MC.latch_tx();

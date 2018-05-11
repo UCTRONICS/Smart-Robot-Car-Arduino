@@ -106,6 +106,9 @@
 // Constants that the user passes in to the motor calls
 #define FORWARD 1
 #define BACKWARD 2
+#define LEFT 3
+#define RIGHT 4
+#define STOP 5
 
 #define FORWARD2 2
 #define BACKWARD2 1
