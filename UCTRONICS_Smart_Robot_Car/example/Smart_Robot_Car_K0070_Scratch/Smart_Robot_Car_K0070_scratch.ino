@@ -39,7 +39,7 @@ union {
 String mVersion = "0d.01.105";
 boolean isAvailable = false;
 boolean isBluetooth = false;
-
+boolean isDetecte = false;
 int len = 52;
 char buffer[52];
 char bufferBt[52];
@@ -123,8 +123,10 @@ void loop() {
       isStart = false;
       parseData();
       index = 0;
-    }else if (!isStart) {
+    } else if (!isStart) {
       if (serialRead >= 1 && serialRead <= 5) { //0x01->forward  0x02->backward  0x03->left  0x04-> right  0x05->stop
+        if(serialRead == 1)  {isDetecte = true;}
+        else  {isDetecte = false;}
         leftMotor1.run(serialRead); rightMotor1.run(serialRead);
         leftMotor1.setSpeed(200);
         rightMotor1.setSpeed(200);
@@ -185,29 +187,36 @@ void readSerial() {
     isBluetooth = false;
     serialRead = Serial.read();
   }
+  if(isDetecte){
+  S = readPing();
+  if (S <= TURN_DIST ) {
+    leftMotor1.run(5); rightMotor1.run(5);//5-> stop
+    leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+  }
+  }
   while (myIR.available())
   {
     irValue =  myIR.read();
   }
   if (irValue == 0xFF46B9)  //forward
   {
-    irValue = 0;
+    irValue = 0;isDetecte = true;
     leftMotor1.run(1); rightMotor1.run(1);//1-> forward
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
   } else if (irValue == 0xFF15EA) { //backward
-    irValue = 0;
+    irValue = 0;isDetecte = false;
     leftMotor1.run(2); rightMotor1.run(2);//2-> backward
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
   } else if (irValue == 0xFF44BB) { // left
-    irValue = 0;
+    irValue = 0;isDetecte = false;
     leftMotor1.run(3); rightMotor1.run(3);//3-> left
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
   } else if (irValue == 0xFF43BC) { //right
-    irValue = 0;
+    irValue = 0;isDetecte = false;
     leftMotor1.run(4); rightMotor1.run(4);//4-> right
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
   } else if (irValue == 0xFF40BF) {  //stop
-    irValue = 0;
+    irValue = 0;isDetecte = false;
     leftMotor1.run(5); rightMotor1.run(5);//5-> stop
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
   }
@@ -237,7 +246,7 @@ void parseData() {
       break;
     case RESET: {
         //reset
-        leftMotor1.run(5);rightMotor1.run(5);
+        leftMotor1.run(5); rightMotor1.run(5);
         leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
         neckControllerServoMotor.write(90);
         delay(100);
