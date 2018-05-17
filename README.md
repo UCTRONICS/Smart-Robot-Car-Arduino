@@ -30,7 +30,7 @@
 
 - Download our UCTRONICS_Smart_Robot_Car library from https://github.com/UCTRONICS/Smart-Robot-Car-Arduino.git
 
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/6.jpeg)
+ ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/1_downloadLibrary.gif) 
 
 - Unzip the Smart-Robot-Car-Arduino and copy the UCTRONICS_Smart_Robot_Car library to ..\Arduino\libraries path
 
