@@ -34,23 +34,22 @@
 
 - Unzip the Smart-Robot-Car-Arduino and copy the UCTRONICS_Smart_Robot_Car library to ..\Arduino\libraries path
 
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/5.jpeg)
+![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/2_copyLibrary.gif) 
 
 - Restart your Arduino IDE and connect your Robot Car. Choose Tools -> port -yout serial port number
-
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/3.jpeg)
-
 - Choose the File -> Examples -> UCTRONICS_Smart_Robot_Car -> example ->[example you choeesed] 
-
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/7.jpeg)
-
 - Then uploading the demo to your Robot Car.
-
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/4.jpeg)
-
+![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/3_downloadDemo.gif) 
+- Download the mblock software.
+![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/4_DownloadMblock.gif) 
+- Install the Mblock software
+![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/5_installMblock.gif) 
+- Install the the UCTRONICS_Smart_RobotCar extension
+![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/6_installUCBlock.gif) 
+- Demo operation
+![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/7_demoOperation.gif) 
 
 ### We add module test code:
-
 #### For motor:
 
 https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/MotorTest/MotorTest.ino
