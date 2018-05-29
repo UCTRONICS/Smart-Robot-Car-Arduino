@@ -15,11 +15,10 @@
 - After power on, it will come in automatic avoidance obstacle mode.
 - At the same time, you also can control it by IR controller and bluetooth controller.
 - If you use IR controller or bluetooth controller to control it, it will automatic leave automatic avoidance obstacle mode.
+# Operation demo
+![Alt text](https://raw.githubusercontent.com/UCTRONICS/Smart-Robot-Car-Arduino/master/imge/operation_test.bmp)
 
-# [NOTICE:]
-
-
-### The  detail  instructions:
+##The  detail  instructions:
 
 - Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
 
