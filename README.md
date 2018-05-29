@@ -1,13 +1,15 @@
 # Smart-Robot-Car-Arduino
-# we have set the baud rate to 115200, old version , please change the baud rate to 9600  in the code  . 
+## UCTRONICS has updated code library.
+## For More powerful wifi car library,please refer to https://github.com/UCTRONICS/WIFI_Camera_Smart_Robot_Car
 
-# UCTRONICS has updated code library.
-# For More powerful wifi car library,please refer to https://github.com/UCTRONICS/WIFI_Camera_Smart_Robot_Car
+## we have set the baud rate to 115200, If you are using the old version , please change the baud rate to 9600  in the code  . 
+
 
 [![IMAGE ALT TEXT](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/video.jpeg)](https://youtu.be/0FB7J-Qzcag "Smart Robot Car Installation")
 
 # K0069 
 ## www.amazon.com/dp/B076MB5VH8
+
 
 # K0070 
 ## www.amazon.com/dp/B076M7JM8R
