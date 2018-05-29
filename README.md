@@ -35,7 +35,7 @@
 - Step6:  Control it by using bluetooth controller, when you control it using bluetooth control, it will leave automatic avoidance obstacle mode.
 
 
-# Detail instructions:
+# This demo support Graphical programming
 - Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
 
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/1.jpeg)
@@ -61,20 +61,15 @@
 - Demo operation
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/7_demoOperation.gif) 
 
-### We add module test code:
-#### For motor:
+# Module test code:
+## For motor:
+- https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/MotorTest/MotorTest.ino
+## For IR:
+- https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/NECTest/NECTest.ino
+## For ultrasonic:
+- https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/ultrasonicTest/ultrasonicTest.ino
 
-https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/MotorTest/MotorTest.ino
-
-#### For IR:
-
-https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/NECTest/NECTest.ino
-
-#### For ultrasonic:
-
-https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/ultrasonicTest/ultrasonicTest.ino
-
-### For Smart_Robot_Car_V2 demo, you should use our UCTRONICS_Car_Controller_V2 software.
+# How to use UCTRONICS_Car_Controller software.
 
 - Step1: Download our app form https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/BlueTooth%20Tool/RobotCar_Controller.apk
 
@@ -99,46 +94,3 @@ https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart
 - Step6: Control your car using the keyboard.
 
 ![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt5.png)
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
