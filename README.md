@@ -3,14 +3,16 @@
 ## For More powerful wifi car library,please refer to https://github.com/UCTRONICS/WIFI_Camera_Smart_Robot_Car
 
 ## we have set the baud rate to 115200, If you are using the old version , please change the baud rate to 9600  in the code . 
-### K0069 
+### K0069： 
 ### www.amazon.com/dp/B076MB5VH8
 - After power on, it will come in automatic avoidance obstacle mode.
-### K0070 
+
+### K0070： 
 ### www.amazon.com/dp/B076M7JM8R
 - After power on, it will come in automatic avoidance obstacle mode.
 - At the same time, you also can control it by IR controller and bluetooth controller.
 - If you use IR controller or bluetooth controller to control it, it will automatic leave automatic avoidance obstacle mode.
+
 # Operation demo video
 ## See the video from  https://youtu.be/gjk8gEmvmAg
 
