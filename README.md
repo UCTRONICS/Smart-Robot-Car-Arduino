@@ -14,6 +14,11 @@
 # K0070 
 ## www.amazon.com/dp/B076M7JM8R
 
+## Mainly work:
+- After power on, it will come in automatic avoidance obstacle mode.
+- At the same time, you also can control it by IR controller and bluetooth controller.
+- If you use IR controller or bluetooth controller to control it, it will automatic leave automatic avoidance obstacle mode.
+
 # [NOTICE:]
 
 
