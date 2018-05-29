@@ -7,6 +7,14 @@
 // Step3: Install The UCTRONICS_Smart_Robot_Car extension
 // Step4: Enjoy your Graphical programming.
 
+// Mainly work:
+//After power on, it will come in automatic avoidance obstacle mode.
+// At the same time, you also can control it by IR controller and bluetooth controller.
+//If you use IR controller or bluetooth controller to control it, it will automatic leave 
+//automatic avoidance obstacle mode.
+
+
+
 #include <UCMotor.h>
 #include <Servo.h>
 #include "UCNEC.h"
@@ -62,7 +70,8 @@ double currentTime = 0.0;
 uint8_t keyPressed = 0;
 uint8_t command_index = 0;
 
-bool isSmartMode  = false;
+bool isSmartMode  = true;
+bool isIrMode  = true;
 unsigned int S;
 unsigned int Sleft;
 unsigned int Sright;
@@ -77,6 +86,8 @@ uint32_t irValue = 0;
 
 UC_DCMotor leftMotor1(3, MOTOR34_64KHZ);
 UC_DCMotor rightMotor1(4, MOTOR34_64KHZ);
+UC_DCMotor leftMotor2(1, MOTOR34_64KHZ);
+UC_DCMotor rightMotor2(2, MOTOR34_64KHZ);
 
 Servo neckControllerServoMotor;
 UCNEC myIR(2);
@@ -101,7 +112,7 @@ void loop() {
     if (c == 0x55 && isStart == false) {
       if (prevc == 0xff) {
         index = 1;
-        isStart = true;
+        isStart = true; isSmartMode = false;
       }
     } else {
       prevc = c;
@@ -123,11 +134,12 @@ void loop() {
       isStart = false;
       parseData();
       index = 0;
-    }else if (!isStart) {
+    } else if (!isStart) {
       if (serialRead >= 1 && serialRead <= 5) { //0x01->forward  0x02->backward  0x03->left  0x04-> right  0x05->stop
         leftMotor1.run(serialRead); rightMotor1.run(serialRead);
-        leftMotor1.setSpeed(200);
-        rightMotor1.setSpeed(200);
+        leftMotor2.run(serialRead); rightMotor2.run(serialRead);
+        leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+        leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
         neckControllerServoMotor.detach();
         delay(100);
         isSmartMode = false;
@@ -138,18 +150,41 @@ void loop() {
         neckControllerServoMotor.write(90);
         isSmartMode = true;
       }
+      if (serialRead == 0x10) { //automatic obstacle avoidance
+        neckControllerServoMotor.attach(SERVO_PIN);
+        neckControllerServoMotor.write(90);
+        //Serial.println("Come in ");
+        delay(100);
+        neckControllerServoMotor.detach();
+        delay(100);
+        isSmartMode = false;
+        myIR.begin();
+        leftMotor1.run(0x05); rightMotor1.run(0x05);
+        leftMotor2.run(0x05); rightMotor2.run(0x05);
+      }
     }
   }
   if (isSmartMode) {
-    neckControllerServoMotor.write(90);
     S = readPing();
     if (S <= TURN_DIST ) {
+      isIrMode = false;
+      neckControllerServoMotor.attach(SERVO_PIN);
+      neckControllerServoMotor.write(90);
       turn();
     } else if (S > TURN_DIST) {
       leftMotor1.run(1); rightMotor1.run(1);//1-> forward
+      leftMotor2.run(1); rightMotor2.run(1);
       leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
-    }
+      leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
+      if (isIrMode == 0) {
+        isIrMode = true;
+        neckControllerServoMotor.detach();
+        delay(100);
+        myIR.begin();
+      }
+    } 
   }
+  
 
 }
 unsigned char readBuffer(int index) {
@@ -191,25 +226,35 @@ void readSerial() {
   }
   if (irValue == 0xFF46B9)  //forward
   {
-    irValue = 0;
+    irValue = 0; isSmartMode = false;
     leftMotor1.run(1); rightMotor1.run(1);//1-> forward
+    leftMotor2.run(1); rightMotor2.run(1);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+    leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF15EA) { //backward
-    irValue = 0;
+    irValue = 0; isSmartMode = false;
     leftMotor1.run(2); rightMotor1.run(2);//2-> backward
+    leftMotor2.run(2); rightMotor2.run(2);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+    leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF44BB) { // left
-    irValue = 0;
+    irValue = 0; isSmartMode = false;
     leftMotor1.run(3); rightMotor1.run(3);//3-> left
+    leftMotor2.run(3); rightMotor2.run(3);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+    leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF43BC) { //right
-    irValue = 0;
+    irValue = 0; isSmartMode = false;
     leftMotor1.run(4); rightMotor1.run(4);//4-> right
+    leftMotor2.run(4); rightMotor2.run(4);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+    leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF40BF) {  //stop
-    irValue = 0;
+    irValue = 0; isSmartMode = false;
     leftMotor1.run(5); rightMotor1.run(5);//5-> stop
+    leftMotor2.run(5); rightMotor2.run(5);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+    leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   }
 }
 /*
@@ -237,8 +282,10 @@ void parseData() {
       break;
     case RESET: {
         //reset
-        leftMotor1.run(5);rightMotor1.run(5);
+        leftMotor1.run(5); rightMotor1.run(5);
+        leftMotor2.run(5); rightMotor2.run(5);
         leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
+        leftMotor2.setSpeed(0); rightMotor2.setSpeed(0);
         neckControllerServoMotor.write(90);
         delay(100);
         neckControllerServoMotor.detach();
@@ -335,7 +382,9 @@ int readPing()
 
 void turn() {
   leftMotor1.run(5); rightMotor1.run(5);//5-> stop
+  leftMotor2.run(5); rightMotor2.run(5);
   leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
+  leftMotor2.setSpeed(0); rightMotor2.setSpeed(0);
   neckControllerServoMotor.write(150);
   delay(500);
   S = readPing();
@@ -350,25 +399,37 @@ void turn() {
   delay(500);
   if (Sleft <= TURN_DIST && Sright <= TURN_DIST) {
     leftMotor1.run(2); rightMotor1.run(2);//2-> backward
+    leftMotor2.run(2); rightMotor2.run(2);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+    leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
     delay(500);
     int x = random(1);
     if (x = 0) {
       leftMotor1.run(4); rightMotor1.run(4);//4-> right
-      leftMotor1.setSpeed(200); rightMotor1.setSpeed(0);
+      leftMotor2.run(4); rightMotor2.run(4);//4-> right
+      leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+      leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
     }
     else {
-      leftMotor1.run(4); rightMotor1.run(4);//3-> left
-      leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
+      leftMotor1.run(3); rightMotor1.run(3);//3-> left
+      leftMotor2.run(3); rightMotor2.run(3);
+      leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+      leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
     }
+    delay(500);
   } else {
     if (Sleft >= Sright) {
-      leftMotor1.run(4); rightMotor1.run(4);//3-> left
-      leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
+      leftMotor1.run(3); rightMotor1.run(3);//3-> left
+      leftMotor2.run(3); rightMotor2.run(3);
+      leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+      leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
     } else {
       leftMotor1.run(4); rightMotor1.run(4);//4-> right
-      leftMotor1.setSpeed(200); rightMotor1.setSpeed(0);
+      leftMotor2.run(4); rightMotor2.run(4);//4-> right
+      leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+      leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
     }
+    delay(500);
   }
 }
 void runModule(int device) {
@@ -389,7 +450,9 @@ void runModule(int device) {
         int directionMode = readBuffer(6);
         int motorSpeed = readBuffer(8);
         leftMotor1.run(directionMode);   rightMotor1.run(directionMode);
+        leftMotor2.run(directionMode);   rightMotor2.run(directionMode);
         leftMotor1.setSpeed(motorSpeed); rightMotor1.setSpeed(motorSpeed);
+        leftMotor2.setSpeed(motorSpeed); rightMotor2.setSpeed(motorSpeed);
       }
       break;
   }
