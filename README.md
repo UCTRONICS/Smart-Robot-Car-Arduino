@@ -1,27 +1,23 @@
 # Smart-Robot-Car-Arduino
-# we have set the baud rate to 115200, old version , please change the baud rate to 9600  in the code  . 
+## UCTRONICS has updated code library.
+## For More powerful wifi car library,please refer to https://github.com/UCTRONICS/WIFI_Camera_Smart_Robot_Car
 
-# UCTRONICS has updated code library.
-# For More powerful wifi car library,please refer to https://github.com/UCTRONICS/WIFI_Camera_Smart_Robot_Car
+## we have set the baud rate to 115200, If you are using the old version , please change the baud rate to 9600  in the code . 
 
-[![IMAGE ALT TEXT](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/video.jpeg)](https://youtu.be/0FB7J-Qzcag "Smart Robot Car Installation")
-
-# K0065 
-# www.amazon.com/dp/B071R2RNJ4
-# K0066 
-# www.amazon.com/dp/B0728C785F
 # K0069 
-# www.amazon.com/dp/B076MB5VH8
+## www.amazon.com/dp/B076MB5VH8
+## Mainly work:
+- After power on, it will come in automatic avoidance obstacle mode.
+
 # K0070 
-# www.amazon.com/dp/B076M7JM8R
+## www.amazon.com/dp/B076M7JM8R
+## Mainly work:
+- After power on, it will come in automatic avoidance obstacle mode.
+- At the same time, you also can control it by IR controller and bluetooth controller.
+- If you use IR controller or bluetooth controller to control it, it will automatic leave automatic avoidance obstacle mode.
 
 # [NOTICE:]
 
-# For K0065 K0069 ，you should use Smart_Robot_Car_V1 demo. For K0066 K0070, you should use Smart_Robot_Car_V2.
-
-# Let us know if you need any help or have any sugestions.
-
-# Our email address is : support@uctronics.com
 
 ### The  detail  instructions:
 
