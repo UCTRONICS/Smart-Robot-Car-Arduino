@@ -3,14 +3,12 @@
 ## For More powerful wifi car library,please refer to https://github.com/UCTRONICS/WIFI_Camera_Smart_Robot_Car
 
 ## we have set the baud rate to 115200, If you are using the old version , please change the baud rate to 9600  in the code . 
-
-# K0069 
-## www.amazon.com/dp/B076MB5VH8
+## K0069 
+### www.amazon.com/dp/B076MB5VH8
 ## Mainly work:
 - After power on, it will come in automatic avoidance obstacle mode.
-
-# K0070 
-## www.amazon.com/dp/B076M7JM8R
+## K0070 
+### www.amazon.com/dp/B076M7JM8R
 ## Mainly work:
 - After power on, it will come in automatic avoidance obstacle mode.
 - At the same time, you also can control it by IR controller and bluetooth controller.
@@ -33,7 +31,6 @@
 - Step5: Search and connect the "HC-05"
 
 - Step6:  Control it by using bluetooth controller, when you control it using bluetooth control, it will leave automatic avoidance obstacle mode.
-
 
 # This demo support Graphical programming
 - Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
