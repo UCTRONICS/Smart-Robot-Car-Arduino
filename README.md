@@ -6,22 +6,14 @@
 
 [![IMAGE ALT TEXT](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/video.jpeg)](https://youtu.be/0FB7J-Qzcag "Smart Robot Car Installation")
 
-# K0065 
-# www.amazon.com/dp/B071R2RNJ4
-# K0066 
-# www.amazon.com/dp/B0728C785F
 # K0069 
-# www.amazon.com/dp/B076MB5VH8
+## www.amazon.com/dp/B076MB5VH8
+
 # K0070 
-# www.amazon.com/dp/B076M7JM8R
+## www.amazon.com/dp/B076M7JM8R
 
 # [NOTICE:]
 
-# For K0065 K0069 ，you should use Smart_Robot_Car_V1 demo. For K0066 K0070, you should use Smart_Robot_Car_V2.
-
-# Let us know if you need any help or have any sugestions.
-
-# Our email address is : support@uctronics.com
 
 ### The  detail  instructions:
 
