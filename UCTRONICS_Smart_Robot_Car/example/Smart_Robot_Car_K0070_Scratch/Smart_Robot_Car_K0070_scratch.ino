@@ -47,7 +47,7 @@ union {
 String mVersion = "0d.01.105";
 boolean isAvailable = false;
 boolean isBluetooth = false;
-
+boolean isDetecte = false;
 int len = 52;
 char buffer[52];
 char bufferBt[52];
@@ -136,6 +136,8 @@ void loop() {
       index = 0;
     } else if (!isStart) {
       if (serialRead >= 1 && serialRead <= 5) { //0x01->forward  0x02->backward  0x03->left  0x04-> right  0x05->stop
+        if(serialRead == 1)  {isDetecte = true;}
+        else  {isDetecte = false;}
         leftMotor1.run(serialRead); rightMotor1.run(serialRead);
         leftMotor2.run(serialRead); rightMotor2.run(serialRead);
         leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
@@ -220,37 +222,64 @@ void readSerial() {
     isBluetooth = false;
     serialRead = Serial.read();
   }
+  if(isDetecte){
+  S = readPing();
+  if (S <= TURN_DIST ) {
+    leftMotor1.run(5); rightMotor1.run(5);//5-> stop
+    leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+  }
+  }
   while (myIR.available())
   {
     irValue =  myIR.read();
   }
   if (irValue == 0xFF46B9)  //forward
   {
+<<<<<<< HEAD
     irValue = 0; isSmartMode = false;
+=======
+    irValue = 0;isDetecte = true;
+>>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
     leftMotor1.run(1); rightMotor1.run(1);//1-> forward
     leftMotor2.run(1); rightMotor2.run(1);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF15EA) { //backward
+<<<<<<< HEAD
     irValue = 0; isSmartMode = false;
+=======
+    irValue = 0;isDetecte = false;
+>>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
     leftMotor1.run(2); rightMotor1.run(2);//2-> backward
     leftMotor2.run(2); rightMotor2.run(2);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF44BB) { // left
+<<<<<<< HEAD
     irValue = 0; isSmartMode = false;
+=======
+    irValue = 0;isDetecte = false;
+>>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
     leftMotor1.run(3); rightMotor1.run(3);//3-> left
     leftMotor2.run(3); rightMotor2.run(3);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF43BC) { //right
+<<<<<<< HEAD
     irValue = 0; isSmartMode = false;
+=======
+    irValue = 0;isDetecte = false;
+>>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
     leftMotor1.run(4); rightMotor1.run(4);//4-> right
     leftMotor2.run(4); rightMotor2.run(4);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF40BF) {  //stop
+<<<<<<< HEAD
     irValue = 0; isSmartMode = false;
+=======
+    irValue = 0;isDetecte = false;
+>>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
     leftMotor1.run(5); rightMotor1.run(5);//5-> stop
     leftMotor2.run(5); rightMotor2.run(5);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
@@ -283,7 +312,10 @@ void parseData() {
     case RESET: {
         //reset
         leftMotor1.run(5); rightMotor1.run(5);
+<<<<<<< HEAD
         leftMotor2.run(5); rightMotor2.run(5);
+=======
+>>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
         leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
         leftMotor2.setSpeed(0); rightMotor2.setSpeed(0);
         neckControllerServoMotor.write(90);
