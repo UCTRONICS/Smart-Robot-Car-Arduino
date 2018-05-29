@@ -26,13 +26,13 @@
 
 - Step2: It will come in automatic avoidance obstacle mode directly.
 
-- Step3: Control it by using IR controller, when you control it using IR control, it will leave automatic avoiddance obstacle mode.
+- Step3: Control it by using IR controller, when you control it using IR control, it will leave automatic avoidance obstacle mode.
 
 - Step4: Download and install the app from https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/BlueTooth%20Tool/RobotCar_Controller.apk
 
 - Step5: Search and connect the "HC-05"
 
-- Step6:  Control it by using bluetooth controller, when you control it using bluetooth control, it will leave automatic avoiddance obstacle mode.
+- Step6:  Control it by using bluetooth controller, when you control it using bluetooth control, it will leave automatic avoidance obstacle mode.
 
 
 # Detail instructions:
