@@ -32,7 +32,7 @@
 
 - Step6:  Control it by using bluetooth controller, when you control it using bluetooth control, it will leave automatic avoidance obstacle mode.
 
-# This demo support Graphical programming
+# This firmware support Graphical programming
 - Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
 
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/1.jpeg)
