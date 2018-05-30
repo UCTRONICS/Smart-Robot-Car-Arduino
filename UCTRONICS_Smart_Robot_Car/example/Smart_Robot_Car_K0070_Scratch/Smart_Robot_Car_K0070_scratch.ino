@@ -235,51 +235,51 @@ void readSerial() {
   }
   if (irValue == 0xFF46B9)  //forward
   {
-<<<<<<< HEAD
+
     irValue = 0; isSmartMode = false;
-=======
+
     irValue = 0;isDetecte = true;
->>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
+
     leftMotor1.run(1); rightMotor1.run(1);//1-> forward
     leftMotor2.run(1); rightMotor2.run(1);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF15EA) { //backward
-<<<<<<< HEAD
+
     irValue = 0; isSmartMode = false;
-=======
+
     irValue = 0;isDetecte = false;
->>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
+
     leftMotor1.run(2); rightMotor1.run(2);//2-> backward
     leftMotor2.run(2); rightMotor2.run(2);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF44BB) { // left
-<<<<<<< HEAD
+
     irValue = 0; isSmartMode = false;
-=======
+
     irValue = 0;isDetecte = false;
->>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
+
     leftMotor1.run(3); rightMotor1.run(3);//3-> left
     leftMotor2.run(3); rightMotor2.run(3);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF43BC) { //right
-<<<<<<< HEAD
+
     irValue = 0; isSmartMode = false;
-=======
+
     irValue = 0;isDetecte = false;
->>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
+
     leftMotor1.run(4); rightMotor1.run(4);//4-> right
     leftMotor2.run(4); rightMotor2.run(4);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   } else if (irValue == 0xFF40BF) {  //stop
-<<<<<<< HEAD
+
     irValue = 0; isSmartMode = false;
-=======
+
     irValue = 0;isDetecte = false;
->>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
+
     leftMotor1.run(5); rightMotor1.run(5);//5-> stop
     leftMotor2.run(5); rightMotor2.run(5);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
@@ -312,10 +312,7 @@ void parseData() {
     case RESET: {
         //reset
         leftMotor1.run(5); rightMotor1.run(5);
-<<<<<<< HEAD
         leftMotor2.run(5); rightMotor2.run(5);
-=======
->>>>>>> 2729dfe8986fd91b2577640d5f3d4b42506bb6be
         leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
         leftMotor2.setSpeed(0); rightMotor2.setSpeed(0);
         neckControllerServoMotor.write(90);
