@@ -152,6 +152,11 @@ void loop() {
         neckControllerServoMotor.write(90);
         isSmartMode = true;
       }
+       if (serialRead == 0x11) {
+        Serial.write(0xAA);
+        Serial.print("{\"version\":\"K0070\"}");
+        Serial.write(0xAB);
+      }
       if (serialRead == 0x10) { //automatic obstacle avoidance
         neckControllerServoMotor.attach(SERVO_PIN);
         neckControllerServoMotor.write(90);
