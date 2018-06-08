@@ -231,7 +231,9 @@ void readSerial() {
   S = readPing();
   if (S <= TURN_DIST ) {
     leftMotor1.run(5); rightMotor1.run(5);//5-> stop
+    leftMotor2.run(5); rightMotor2.run(5);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+    leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
   }
   }
   while (myIR.available())
