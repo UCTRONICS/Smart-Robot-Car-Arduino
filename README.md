@@ -13,6 +13,14 @@
 - At the same time, you also can control it by IR controller and bluetooth controller.
 - If you use IR controller or bluetooth controller to control it, it will automatic leave automatic avoidance obstacle mode.
 
+### K0072： 
+### ---
+- Update form K0070, support Four-wheel drive 
+- After power on, it will come in automatic avoidance obstacle mode.
+- At the same time, you also can control it by IR controller and bluetooth controller.
+- If you use IR controller or bluetooth controller to control it, it will automatic leave automatic avoidance obstacle mode.
+
+
 # Operation demo video
 ## K0070 See the video from https://www.youtube.com/watch?v=gjk8gEmvmAg
 
