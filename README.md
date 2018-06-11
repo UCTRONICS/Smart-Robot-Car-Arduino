@@ -13,10 +13,22 @@
 - At the same time, you also can control it by IR controller and bluetooth controller.
 - If you use IR controller or bluetooth controller to control it, it will automatic leave automatic avoidance obstacle mode.
 
+### K0072： 
+### ---
+- Update form K0070, support Four-wheel drive 
+- After power on, it will come in automatic avoidance obstacle mode.
+- At the same time, you also can control it by IR controller and bluetooth controller.
+- If you use IR controller or bluetooth controller to control it, it will automatic leave automatic avoidance obstacle mode.
+
+
 # Operation demo video
-## See the video from https://www.youtube.com/watch?v=gjk8gEmvmAg
+## K0070 See the video from https://www.youtube.com/watch?v=gjk8gEmvmAg
 
 ![Alt text](https://raw.githubusercontent.com/UCTRONICS/Smart-Robot-Car-Arduino/master/imge/operation_test.bmp)
+
+# Installation demo video
+## K0072 Installation demo:
+[![IMAGE ALT TEXT](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/K0072_video.jpg)](https://youtu.be/WfIpiOwYpF8 "K0072 Installation")
 
 # Quick Start
 
