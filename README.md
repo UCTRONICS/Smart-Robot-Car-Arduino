@@ -14,7 +14,7 @@
 - If you use IR controller or bluetooth controller to control it, it will automatic leave automatic avoidance obstacle mode.
 
 # Operation demo video
-## See the video from  https://youtu.be/gjk8gEmvmAg
+## See the video from https://www.youtube.com/watch?v=gjk8gEmvmAg
 
 ![Alt text](https://raw.githubusercontent.com/UCTRONICS/Smart-Robot-Car-Arduino/master/imge/operation_test.bmp)
 
