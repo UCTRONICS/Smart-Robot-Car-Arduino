@@ -5,10 +5,7 @@
 ## we have set the baud rate to 115200, If you are using the old version , please change the baud rate to 9600  in the code . 
 ## At present， UCTRONICS has released three versions Robot car. Both of them support graphical programming.Please refer to the below links to know detail information about each robot car.
 ### K0069： 
-
-### www.amazon.com/dp/B076MB5VH8
-- After power on, it will come in automatic avoidance obstacle mode.
-
+#### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0069.md
 ### K0070： 
 ### www.amazon.com/dp/B076M7JM8R
 - After power on, it will come in automatic avoidance obstacle mode.
