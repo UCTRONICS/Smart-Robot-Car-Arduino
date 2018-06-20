@@ -10,7 +10,7 @@
 #### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0069.md
 ### K0070： 
 #### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0070.md
-### K0070： 
+### K0072： 
 #### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0072.md
 
 
