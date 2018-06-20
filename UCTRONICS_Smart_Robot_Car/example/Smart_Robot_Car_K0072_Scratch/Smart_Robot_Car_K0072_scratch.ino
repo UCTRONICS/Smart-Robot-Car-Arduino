@@ -109,6 +109,9 @@ UCNEC myIR(2);
 void setup() {
   pinMode(ECHO_PIN, INPUT); //Set the connection pin output mode Echo pin
   pinMode(TRIG_PIN, OUTPUT);//Set the connection pin output mode trog pin
+  pinMode(leftSensor, INPUT_PULLUP);
+  pinMode(middleSensor, INPUT_PULLUP);
+  pinMode(rightSensor, INPUT_PULLUP);
   neckControllerServoMotor.attach(SERVO_PIN);
   neckControllerServoMotor.write(90);
   delay(2000);
