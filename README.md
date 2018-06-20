@@ -33,7 +33,7 @@
 
 - Step6:  Control it by using bluetooth controller, when you control it using bluetooth control, it will leave automatic avoidance obstacle mode.
 
-# How to upload the robot car's firmware
+# How to upload the robot car's firmware(Taking an example of K0070)
 
 - Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
 
@@ -52,7 +52,7 @@
 - Then uploading the demo to your Robot Car.
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/3_downloadDemo.gif) 
 
-# This firmware support Graphical programming
+# This firmware support Graphical programming(Taking an example of K0070)
 - Download the mblock software.
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/4_DownloadMblock.gif) 
 - Install the Mblock software
