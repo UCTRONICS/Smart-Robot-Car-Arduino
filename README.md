@@ -3,7 +3,9 @@
 ## For More powerful wifi car library,please refer to https://github.com/UCTRONICS/WIFI_Camera_Smart_Robot_Car
 
 ## we have set the baud rate to 115200, If you are using the old version , please change the baud rate to 9600  in the code . 
+## At present， UCTRONICS has released three versions Robot car. Both of them support graphical programming.Please refer to the below link to know detail information about each robot car.
 ### K0069： 
+
 ### www.amazon.com/dp/B076MB5VH8
 - After power on, it will come in automatic avoidance obstacle mode.
 
