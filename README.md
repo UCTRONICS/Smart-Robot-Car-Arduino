@@ -6,16 +6,16 @@
 
 ## At present， UCTRONICS has released three versions Robot car. Both of them support graphical programming.Please refer to the below links to know detail information about each robot car.
 
-### K0069： 
-#### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0069.md
-### K0070： 
-#### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0070.md
-### K0072： 
+## K0069： 
+### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0069.md
+## K0070： 
+### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0070.md
+## K0072： 
 #### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0072.md
 
 
 
-# How to upload the robot car's firmware(Taking an example of K0070)
+##  How to upload the robot car's firmware(Taking an example of K0070)
 
 - Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
 
@@ -34,7 +34,7 @@
 - Then uploading the demo to your Robot Car.
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/3_downloadDemo.gif) 
 
-# This firmware support Graphical programming(Taking an example of K0070)
+##  This firmware support Graphical programming(Taking an example of K0070)
 - Download the mblock software.
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/4_DownloadMblock.gif) 
 - Install the Mblock software
@@ -44,36 +44,11 @@
 - Demo operation
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/7_demoOperation.gif) 
 
-# Module test code:
-## For motor:
+##  Module test code:
+###  For motor:
 - https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/MotorTest/MotorTest.ino
-## For IR:
+###  For IR:
 - https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/NECTest/NECTest.ino
-## For ultrasonic:
+###  For ultrasonic:
 - https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/UCTRONICS_Smart_Robot_Car/example/ultrasonicTest/ultrasonicTest.ino
 
-# How to use UCTRONICS_Car_Controller software.
-
-- Step1: Download our app form https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/BlueTooth%20Tool/RobotCar_Controller.apk
-
-![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/8.jpeg)
-
-- Step2: Open the RobotCar_Controller.apk and choose Connected device
-
- ![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt1.png)
- 
-- Step3: Choose CAR CONTROL MODE
-
-![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt2.png)
-
-- Step4: Choose RESEARCH .If you are the first conect it skip this step
-
-![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt3.png)
-
-- Step5: choose HC-05, if you are the first connect it, you should input the password"1234"/"0000"
-
-![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt4.png)
-
-- Step6: Control your car using the keyboard.
-
-![Alt text](https://github.com/UCTRONICS/pic/blob/master/bt5.png)
