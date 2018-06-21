@@ -17,15 +17,15 @@
 
 ##  How to upload the robot car's firmware(Taking an example of K0070)
 
-- Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
+ ### Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
 
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/1.jpeg)
 
-- Download our UCTRONICS_Smart_Robot_Car library from https://github.com/UCTRONICS/Smart-Robot-Car-Arduino.git
+### Download our UCTRONICS_Smart_Robot_Car library from https://github.com/UCTRONICS/Smart-Robot-Car-Arduino.git
 
  ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/1_downloadLibrary.gif) 
 
-- Unzip the Smart-Robot-Car-Arduino and copy the UCTRONICS_Smart_Robot_Car library to ..\Arduino\libraries path
+### Unzip the Smart-Robot-Car-Arduino and copy the UCTRONICS_Smart_Robot_Car library to ..\Arduino\libraries path
 
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/2_copyLibrary.gif) 
 
@@ -35,13 +35,13 @@
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/3_downloadDemo.gif) 
 
 ##  This firmware support Graphical programming(Taking an example of K0070)
-- Download the mblock software.
+### Download the mblock software.
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/4_DownloadMblock.gif) 
-- Install the Mblock software
+### Install the Mblock software
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/5_installMblock.gif) 
-- Install the the UCTRONICS_Smart_RobotCar extension
+### Install the the UCTRONICS_Smart_RobotCar extension
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/6_installUCBlock.gif) 
-- Demo operation
+### Demo operation
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/7_demoOperation.gif) 
 
 ##  Module test code:
