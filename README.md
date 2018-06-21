@@ -15,24 +15,6 @@
 
 
 
-
-
-
-
-# Quick Start
-
-- Step1: Power on the robot car
-
-- Step2: It will come in automatic avoidance obstacle mode directly.
-
-- Step3: Control it by using IR controller, when you control it using IR control, it will leave automatic avoidance obstacle mode.
-
-- Step4: Download and install the app from https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/raw/master/BlueTooth%20Tool/RobotCar_Controller.apk
-
-- Step5: Search and connect the "HC-05"
-
-- Step6:  Control it by using bluetooth controller, when you control it using bluetooth control, it will leave automatic avoidance obstacle mode.
-
 # How to upload the robot car's firmware(Taking an example of K0070)
 
 - Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
