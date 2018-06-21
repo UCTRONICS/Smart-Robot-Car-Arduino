@@ -11,14 +11,11 @@
 ## K0070： 
 ### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0070.md
 ## K0072： 
-#### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0072.md
-
-
+### https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/document/K0072.md
 
 ##  How to upload the robot car's firmware(Taking an example of K0070)
 
- ### Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
-
+### Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/1.jpeg)
 
 ### Download our UCTRONICS_Smart_Robot_Car library from https://github.com/UCTRONICS/Smart-Robot-Car-Arduino.git
