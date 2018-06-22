@@ -109,9 +109,6 @@ UCNEC myIR(2);
 void setup() {
   pinMode(ECHO_PIN, INPUT); //Set the connection pin output mode Echo pin
   pinMode(TRIG_PIN, OUTPUT);//Set the connection pin output mode trog pin
-  pinMode(leftSensor, INPUT_PULLUP);
-  pinMode(middleSensor, INPUT_PULLUP);
-  pinMode(rightSensor, INPUT_PULLUP);
   neckControllerServoMotor.attach(SERVO_PIN);
   neckControllerServoMotor.write(90);
   delay(2000);
@@ -210,7 +207,7 @@ void loop() {
   }
   if (isSmartMode) {
     S = readPing();
-    if (S <= TURN_DIST ) {
+    if (S > 0 && S <= TURN_DIST ) {
       isIrMode = false;
       neckControllerServoMotor.attach(SERVO_PIN);
       neckControllerServoMotor.write(90);
@@ -267,7 +264,7 @@ void readSerial() {
   }
   if (isDetecte) {
     S = readPing();
-    if (S <= TURN_DIST ) {
+    if (S > 0 && S <= TURN_DIST ) {
       leftMotor1.run(5); rightMotor1.run(5);//5-> stop
       leftMotor2.run(5); rightMotor2.run(5);//5-> stop
       leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
@@ -428,25 +425,6 @@ long readLong(int idx) {
   val.byteVal[3] = readBuffer(idx + 3);
   return val.longVal;
 }
-int readPing()
-{
-  // establish variables for duration of the ping,
-  // and the distance result in inches and centimeters:
-  long duration, cm;
-  // The PING))) is triggered by a HIGH pulse of 2 or more microseconds.
-  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
-  pinMode(TRIG_PIN, OUTPUT);
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(TRIG_PIN, LOW);
-  pinMode(ECHO_PIN, INPUT);
-  duration = pulseIn(ECHO_PIN, HIGH);
-  // convert the time into a distance
-  cm = duration / 29 / 2;;
-  return cm ;
-}
 
 void turn() {
   leftMotor1.run(5); rightMotor1.run(5);//5-> stop
@@ -454,23 +432,23 @@ void turn() {
   leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
   leftMotor2.setSpeed(0); rightMotor2.setSpeed(0);
   neckControllerServoMotor.write(150);
-  delay(500);
+  delay(300);
   S = readPing();
   Sleft = S;
   neckControllerServoMotor.write(90);
-  delay(500);
+  delay(300);
   neckControllerServoMotor.write(30);
-  delay(500);
+  delay(300);
   S = readPing();
   Sright = S;
   neckControllerServoMotor.write(90);
-  delay(500);
+  delay(300);
   if (Sleft <= TURN_DIST && Sright <= TURN_DIST) {
     leftMotor1.run(2); rightMotor1.run(2);//2-> backward
     leftMotor2.run(2); rightMotor2.run(2);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
-    delay(500);
+    delay(300);
     int x = random(1);
     if (x = 0) {
       leftMotor1.run(4); rightMotor1.run(4);//4-> right
@@ -484,7 +462,7 @@ void turn() {
       leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
       leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
     }
-    delay(500);
+    delay(300);
   } else {
     if (Sleft >= Sright) {
       leftMotor1.run(3); rightMotor1.run(3);//3-> left
@@ -497,7 +475,7 @@ void turn() {
       leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
       leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
     }
-    delay(500);
+    delay(300);
   }
 }
 void runModule(int device) {
@@ -564,8 +542,8 @@ void moveTrack(void)
     } else if ( (num1 == 0) && num3 == 1) { //go to right
       leftMotor1.run(3); rightMotor1.run(3);//3-> left
       leftMotor2.run(3); rightMotor2.run(3);
-      leftMotor1.setSpeed(0); rightMotor1.setSpeed(180);
-      leftMotor2.setSpeed(0); rightMotor2.setSpeed(180);
+      leftMotor1.setSpeed(0); rightMotor1.setSpeed(150);
+      leftMotor2.setSpeed(0); rightMotor2.setSpeed(150);
       while (1) {
         if ((Serial.available() > 0))
         {
@@ -576,8 +554,8 @@ void moveTrack(void)
         if (num2) {
           leftMotor1.run(3); rightMotor1.run(3);//3-> left
           leftMotor2.run(3); rightMotor2.run(3);
-          leftMotor1.setSpeed(0); rightMotor1.setSpeed(180);
-          leftMotor2.setSpeed(0); rightMotor2.setSpeed(180);
+          leftMotor1.setSpeed(0); rightMotor1.setSpeed(150);
+          leftMotor2.setSpeed(0); rightMotor2.setSpeed(150);
           continue;
         }
         else
@@ -586,8 +564,8 @@ void moveTrack(void)
     } else if ((num3 == 0) && (num1 == 1)) { // go to left
       leftMotor1.run(4); rightMotor1.run(4);//4-> right
       leftMotor2.run(4); rightMotor2.run(4);
-      leftMotor1.setSpeed(180); rightMotor1.setSpeed(0);
-      leftMotor2.setSpeed(180); rightMotor2.setSpeed(0);
+      leftMotor1.setSpeed(150); rightMotor1.setSpeed(0);
+      leftMotor2.setSpeed(150); rightMotor2.setSpeed(0);
       while (1) {
         if ((Serial.available() > 0))
         {
@@ -598,8 +576,8 @@ void moveTrack(void)
         if (num2) {
           leftMotor1.run(4); rightMotor1.run(4);//4-> right
           leftMotor2.run(4); rightMotor2.run(4);
-          leftMotor1.setSpeed(180); rightMotor1.setSpeed(0);
-          leftMotor2.setSpeed(180); rightMotor2.setSpeed(0);
+          leftMotor1.setSpeed(150); rightMotor1.setSpeed(0);
+          leftMotor2.setSpeed(150); rightMotor2.setSpeed(0);
           continue;
         }
         else
@@ -610,8 +588,8 @@ void moveTrack(void)
     {
       leftMotor1.run(1); rightMotor1.run(1);//1-> forward
       leftMotor2.run(1); rightMotor2.run(1);
-      leftMotor1.setSpeed(180); rightMotor1.setSpeed(180);
-      leftMotor2.setSpeed(180); rightMotor2.setSpeed(180);
+      leftMotor1.setSpeed(150); rightMotor1.setSpeed(150);
+      leftMotor2.setSpeed(150); rightMotor2.setSpeed(150);
     }
   }
 }
@@ -663,3 +641,46 @@ void servo_Horizontal(int corner)
   servoXPoint = corner;
 }
 
+
+int getUltrasonicVal(void)
+  {
+      unsigned char cnt = 0;
+      long cm, beginTime, stopTime;
+      long waitCount = 0;
+      pinMode(TRIG_PIN, OUTPUT); pinMode(ECHO_PIN, INPUT);
+      digitalWrite(TRIG_PIN, LOW); delayMicroseconds(2);
+      digitalWrite(TRIG_PIN, HIGH); delayMicroseconds(5);
+      digitalWrite(TRIG_PIN, LOW);  waitCount = 0;
+      while (!(digitalRead(ECHO_PIN) == 1)) {
+            if (++waitCount >= 30000)
+              break;
+      }
+      beginTime = micros(); waitCount = 0;
+      while (!(digitalRead(ECHO_PIN) == 0)) {
+            if (++waitCount >= 30000)
+              break;
+      }
+      stopTime = micros();
+      cm  = (float)(stopTime - beginTime) / 1000000 * 34000 / 2; 
+      return cm;
+}
+
+int readPing(void)
+{
+  int Res[3];
+  int res;
+  int maxvalue; 
+  int minvalue;
+  
+  for(int i=0;i<3;i++)
+  {
+    Res[i] = getUltrasonicVal();  
+    delay(10); 
+  }
+  maxvalue = Res[0] >= Res[1] ? Res[0] : Res[1];
+  maxvalue = maxvalue >= Res[2] ? maxvalue : Res[2];
+  minvalue = Res[0] <= Res[1] ? Res[0] : Res[1];
+  minvalue = minvalue <= Res[2] ? minvalue : Res[2];
+  res = Res[0] + Res[1] + Res[2] - maxvalue - minvalue;
+  return res;
+}
