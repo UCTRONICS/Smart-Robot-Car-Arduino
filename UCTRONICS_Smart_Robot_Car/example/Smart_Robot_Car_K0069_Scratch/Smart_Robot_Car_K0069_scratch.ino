@@ -269,45 +269,25 @@ long readLong(int idx) {
   val.byteVal[3] = readBuffer(idx + 3);
   return val.longVal;
 }
-int readPing()
-{
-  // establish variables for duration of the ping,
-  // and the distance result in inches and centimeters:
-  long duration, cm;
-  // The PING))) is triggered by a HIGH pulse of 2 or more microseconds.
-  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
-  pinMode(TRIG_PIN, OUTPUT);
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(TRIG_PIN, LOW);
-  pinMode(ECHO_PIN, INPUT);
-  duration = pulseIn(ECHO_PIN, HIGH);
-  // convert the time into a distance
-  cm = duration / 29 / 2;;
-  return cm ;
-}
-
 void turn() {
   leftMotor1.run(5); rightMotor1.run(5);//5-> stop
   leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
   neckControllerServoMotor.write(150);
-  delay(500);
+  delay(300);
   S = readPing();
   Sleft = S;
   neckControllerServoMotor.write(90);
-  delay(500);
+  delay(300);
   neckControllerServoMotor.write(30);
-  delay(500);
+  delay(300);
   S = readPing();
   Sright = S;
   neckControllerServoMotor.write(90);
-  delay(500);
+  delay(300);
   if (Sleft <= TURN_DIST && Sright <= TURN_DIST) {
     leftMotor1.run(2); rightMotor1.run(2);//2-> backward
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
-    delay(500);
+    delay(300);
     int x = random(1);
     if (x = 0) {
       leftMotor1.run(4); rightMotor1.run(4);//4-> right
@@ -369,4 +349,48 @@ void readSensor(int device) {
       }
       break;
   }
+}
+
+
+int getUltrasonicVal(void)
+  {
+      unsigned char cnt = 0;
+      long cm, beginTime, stopTime;
+      long waitCount = 0;
+      pinMode(TRIG_PIN, OUTPUT); pinMode(ECHO_PIN, INPUT);
+      digitalWrite(TRIG_PIN, LOW); delayMicroseconds(2);
+      digitalWrite(TRIG_PIN, HIGH); delayMicroseconds(5);
+      digitalWrite(TRIG_PIN, LOW);  waitCount = 0;
+      while (!(digitalRead(ECHO_PIN) == 1)) {
+            if (++waitCount >= 30000)
+              break;
+      }
+      beginTime = micros(); waitCount = 0;
+      while (!(digitalRead(ECHO_PIN) == 0)) {
+            if (++waitCount >= 30000)
+              break;
+      }
+      stopTime = micros();
+      cm  = (float)(stopTime - beginTime) / 1000000 * 34000 / 2; 
+      return cm;
+}
+
+int readPing(void)
+{
+  int Res[3];
+  int res;
+  int maxvalue; 
+  int minvalue;
+  
+  for(int i=0;i<3;i++)
+  {
+    Res[i] = getUltrasonicVal();  
+    delay(10); 
+  }
+  maxvalue = Res[0] >= Res[1] ? Res[0] : Res[1];
+  maxvalue = maxvalue >= Res[2] ? maxvalue : Res[2];
+  minvalue = Res[0] <= Res[1] ? Res[0] : Res[1];
+  minvalue = minvalue <= Res[2] ? minvalue : Res[2];
+  res = Res[0] + Res[1] + Res[2] - maxvalue - minvalue;
+  return res;
 }
