@@ -1,56 +1,39 @@
 //This demo is used for testing the Motor module.
-#define leftFactor 10
-#define rightFactor 5
-#define speedSet  150
-
 #include <UCMotor.h>
-UC_DCMotor leftMotor(3, MOTOR34_64KHZ);
-UC_DCMotor rightMotor(4, MOTOR34_64KHZ);
 
+UC_DCMotor leftMotor1(3, MOTOR34_64KHZ);
+UC_DCMotor rightMotor1(4, MOTOR34_64KHZ);
+UC_DCMotor leftMotor2(1, MOTOR34_64KHZ);
+UC_DCMotor rightMotor2(2, MOTOR34_64KHZ);
 void setup() {
-  Serial.begin(9600);
-}
- void loop() {
- moveForward();
- delay(2000);
- moveBackward();
- delay(2000);
- turnLeft();
- delay(2000);
- turnRight();
- delay(2000);
- moveStop();
- delay(2000);
-}
-void moveForward() {
-  leftMotor.run(FORWARD);
-  rightMotor.run(FORWARD);
-  leftMotor.setSpeed(speedSet + leftFactor);
-  rightMotor.setSpeed(speedSet + rightFactor);
-}
-void turnLeft() {
-  leftMotor.run(BACKWARD);
-  rightMotor.run(FORWARD);
-  leftMotor.setSpeed(speedSet + leftFactor);
-  rightMotor.setSpeed(speedSet + rightFactor);
-  delay(400);
-  moveStop();
-}
-void turnRight() {
-  leftMotor.run(FORWARD);
-  rightMotor.run(BACKWARD);
-  leftMotor.setSpeed(speedSet + leftFactor);
-  rightMotor.setSpeed(speedSet + rightFactor);
-  delay(400);
-  moveStop();
-}
-void moveBackward() {
-  leftMotor.run(BACKWARD);
-  rightMotor.run(BACKWARD);
-  leftMotor.setSpeed(speedSet + leftFactor);
-  rightMotor.setSpeed(speedSet + rightFactor);
-}
-void moveStop() {
-  leftMotor.run(RELEASE); rightMotor.run(RELEASE);
+  // put your setup code here, to run once:
+
 }
 
+void loop() {
+  //Forward
+        leftMotor1.run(0x01); rightMotor1.run(0x01);
+        leftMotor2.run(0x01); rightMotor2.run(0x01);
+        leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+        leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
+        delay(2000);
+   //Backward
+        leftMotor1.run(0x02); rightMotor1.run(0x02);
+        leftMotor2.run(0x02); rightMotor2.run(0x02);
+        leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+        leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
+        delay(2000);
+    //left
+        leftMotor1.run(0x03); rightMotor1.run(0x03);
+        leftMotor2.run(0x03); rightMotor2.run(0x03);
+        leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+        leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
+        delay(2000); 
+    //Right
+        leftMotor1.run(0x04); rightMotor1.run(0x04);
+        leftMotor2.run(0x04); rightMotor2.run(0x04);
+        leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
+        leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
+        delay(2000);      
+
+}
