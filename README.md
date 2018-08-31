@@ -18,17 +18,15 @@
 ### Download and install the Arduino IDE from https://www.arduino.cc/download_handler.php?f=/arduino-1.8.5-windows.exe
 ![Alt text](https://github.com/UCTRONICS/Smart-Robot-Car-Arduino/blob/master/imge/1.jpeg)
 
-### Download our UCTRONICS_Smart_Robot_Car library from https://github.com/UCTRONICS/Smart-Robot-Car-Arduino.git
-
+### Library installation instructions
+1. Download our UCTRONICS_Smart_Robot_Car library from https://github.com/UCTRONICS/Smart-Robot-Car-Arduino.git
  ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/1_downloadLibrary.gif) 
-
-### Unzip the Smart-Robot-Car-Arduino and copy the UCTRONICS_Smart_Robot_Car library to ..\Arduino\libraries path
-
-![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/2_copyLibrary.gif) 
-
-- Restart your Arduino IDE and connect your Robot Car. Choose Tools -> port -yout serial port number
-- Choose the File -> Examples -> UCTRONICS_Smart_Robot_Car -> example ->[example you choeesed] 
-- Then uploading the demo to your Robot Car.
+2. Unzip the downloaded file.
+3. (In the Arduino IDE) Sketch -> Include Library -> Add .ZIP Library... -> select the `UCTRONICS_Smart_Robot_Car` subfolder of the unzipped file -> Open
+4. Connect your Robot Car to your computer with a USB cable.
+5. Tools -> Port -> select the serial port of the Robot Car
+6. File -> Examples -> UCTRONICS_Smart_Robot_Car -> example -> [example of your choice] 
+7. Click the Upload button
 ![EasyBehavior](https://github.com/UCTRONICS/pic/blob/master/K0070GIF/3_downloadDemo.gif) 
 
 ##  This firmware support Graphical programming(Taking an example of K0070)
