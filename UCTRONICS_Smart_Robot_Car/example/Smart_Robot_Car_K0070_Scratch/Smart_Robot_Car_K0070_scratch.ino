@@ -59,6 +59,7 @@ char serialRead;
 #define ROBOTCAR 54
 #define ULTRASONIC_SENSOR 55
 #define SERVO 56
+#define IR_SENSOR 57
 
 #define GET 1
 #define RUN 2
@@ -238,7 +239,7 @@ void readSerial() {
   {
     irValue =  myIR.read();
   }
-  if (irValue == 0xFF46B9)  //forward
+  if (irValue == 0xFF46B9 || irValue == 0xFF18E7)  //forward
   {
 
     irValue = 0; isSmartMode = false;
@@ -249,7 +250,7 @@ void readSerial() {
     leftMotor2.run(1); rightMotor2.run(1);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
-  } else if (irValue == 0xFF15EA) { //backward
+  } else if (irValue == 0xFF15EA || irValue == 0xFF52AD) { //backward
 
     irValue = 0; isSmartMode = false;
 
@@ -259,7 +260,7 @@ void readSerial() {
     leftMotor2.run(2); rightMotor2.run(2);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
-  } else if (irValue == 0xFF44BB) { // left
+  } else if (irValue == 0xFF44BB || irValue == 0xFF08F7) { // left
 
     irValue = 0; isSmartMode = false;
 
@@ -269,7 +270,7 @@ void readSerial() {
     leftMotor2.run(3); rightMotor2.run(3);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
-  } else if (irValue == 0xFF43BC) { //right
+  } else if (irValue == 0xFF43BC || irValue == 0xFF5AA5) { //right
 
     irValue = 0; isSmartMode = false;
 
@@ -279,7 +280,7 @@ void readSerial() {
     leftMotor2.run(4); rightMotor2.run(4);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
-  } else if (irValue == 0xFF40BF) {  //stop
+  } else if (irValue == 0xFF40BF|| irValue == 0xFF1CE3) {  //stop
 
     irValue = 0; isSmartMode = false;
 
@@ -394,26 +395,6 @@ long readLong(int idx) {
   val.byteVal[3] = readBuffer(idx + 3);
   return val.longVal;
 }
-//int readPing()
-//{
-//  // establish variables for duration of the ping,
-//  // and the distance result in inches and centimeters:
-//  long duration, cm;
-//  // The PING))) is triggered by a HIGH pulse of 2 or more microseconds.
-//  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
-//  pinMode(TRIG_PIN, OUTPUT);
-//  digitalWrite(TRIG_PIN, LOW);
-//  delayMicroseconds(2);
-//  digitalWrite(TRIG_PIN, HIGH);
-//  delayMicroseconds(5);
-//  digitalWrite(TRIG_PIN, LOW);
-//  pinMode(ECHO_PIN, INPUT);
-//  duration = pulseIn(ECHO_PIN, HIGH);
-//  // convert the time into a distance
-//  cm = duration / 29 / 2;;
-//  return cm ;
-//}
-
 void turn() {
   leftMotor1.run(5); rightMotor1.run(5);//5-> stop
   leftMotor2.run(5); rightMotor2.run(5);
@@ -505,8 +486,7 @@ void readSensor(int device) {
     case ULTRASONIC_SENSOR: {
         value = readPing();
         sendFloat(value);
-      }
-      break;
+      }break;  
   }
 }
 

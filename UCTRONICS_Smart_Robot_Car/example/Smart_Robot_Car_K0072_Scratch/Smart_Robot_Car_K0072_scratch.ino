@@ -274,7 +274,7 @@ void readSerial() {
   {
     irValue =  myIR.read();
   }
-  if (irValue == 0xFF46B9)  //forward
+  if (irValue == 0xFF46B9|| irValue == 0xFF18E7)  //forward
   {
 
     irValue = 0; isSmartMode = false;
@@ -284,7 +284,7 @@ void readSerial() {
     leftMotor2.run(1); rightMotor2.run(1);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
-  } else if (irValue == 0xFF15EA) { //backward
+  } else if (irValue == 0xFF15EA || irValue == 0xFF52AD) { //backward
 
     irValue = 0; isSmartMode = false;
     isDetecte = false;
@@ -293,7 +293,7 @@ void readSerial() {
     leftMotor2.run(2); rightMotor2.run(2);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
-  } else if (irValue == 0xFF44BB) { // left
+  } else if (irValue == 0xFF44BB || irValue == 0xFF08F7) { // left
 
     irValue = 0; isSmartMode = false;
     isDetecte = false;
@@ -302,7 +302,7 @@ void readSerial() {
     leftMotor2.run(3); rightMotor2.run(3);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
-  } else if (irValue == 0xFF43BC) { //right
+  } else if (irValue == 0xFF43BC || irValue == 0xFF5AA5) { //right
 
     irValue = 0; isSmartMode = false;
     isDetecte = false;
@@ -311,7 +311,7 @@ void readSerial() {
     leftMotor2.run(4); rightMotor2.run(4);
     leftMotor1.setSpeed(200); rightMotor1.setSpeed(200);
     leftMotor2.setSpeed(200); rightMotor2.setSpeed(200);
-  } else if (irValue == 0xFF40BF) {  //stop
+  } else if (irValue == 0xFF40BF || irValue == 0xFF1CE3) {  //stop
 
     irValue = 0; isSmartMode = false;
     isDetecte = false;
